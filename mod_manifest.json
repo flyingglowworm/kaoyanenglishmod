@@ -1,0 +1,10 @@
+{
+  "id": "KaoyanEnglishMod",
+  "name": "考研英语",
+  "author": "MuYezhou",
+  "description": "Adds a postgraduate English vocabulary challenge relic.",
+  "version": "0.1.0",
+  "has_pck": true,
+  "has_dll": true,
+  "affects_gameplay": true
+}
