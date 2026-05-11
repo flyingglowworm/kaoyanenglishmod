@@ -4,11 +4,13 @@ Slay the Spire 2 的 Godot C# 独立 Mod。
 
 下载请前往 Releases 页面。
 下面是项目信息和安装卸载说明：
-这是一个 Slay the Spire 2 的 Godot C# 独立 Mod。
+<img width="1670" height="812" alt="image" src="https://github.com/user-attachments/assets/2ae47e00-0cc6-4823-bbf4-8fb622771287" />
+
 
 ## Mod 内容
 
 开局获得遗物：考研词典。
+<img width="539" height="697" alt="image" src="https://github.com/user-attachments/assets/69008f8a-6276-40aa-94b0-863ce1b04df6" />
 
 战斗开始后，玩家可以选择是否挑战考研英语单词。
 
