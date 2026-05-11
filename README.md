@@ -44,7 +44,8 @@ Slay the Spire 2 的 Godot C# 独立 Mod。
 已知限制：
 - 目前只有简体中文文本。
 - UI 和数值仍可能继续调整。
-- 这是早期版本，目前只适用于游戏版本v0.103.2（2026年4约16日版本）可能与未来游戏更新或者beta测试版不兼容。
+- 这是早期版本，目前只适用于游戏版本v0.103.2（2026年4月16日版本）
+  可能与未来游戏更新或者beta测试版不兼容。
 
 ## 安装方法
 
@@ -60,9 +61,12 @@ KaoyanEnglishMod/
 ```
 
 **将整个 KaoyanEnglishMod 文件夹复制到 Slay the Spire 2 的 mods 目录：**
+
 （*注：如果没有这个文件夹，只需要自己在Slay the spire2的目录中添加 \mods即可* )
+
 <img width="966" height="700" alt="image" src="https://github.com/user-attachments/assets/a840df85-80df-4177-bce5-85af4db00439" />
 <center> 没装过mod的朋友只要新建图中这个文件夹，然后放到里面就可以了</center>
+
 ```
 ...\SteamLibrary\steamapps\common\Slay the Spire 2\mods\
 ```
