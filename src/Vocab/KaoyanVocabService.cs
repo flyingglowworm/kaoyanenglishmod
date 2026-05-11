@@ -9,8 +9,10 @@ namespace KaoyanEnglishMod.Vocab;
 
 public sealed class KaoyanVocabService
 {
-    private const int MinimumEffectiveWeight = 3;
-    private const int MaximumEffectiveWeight = 10;
+    private const int HighFrequencyEdgeWeight = 3;
+    private const int MiddleEffectiveWeight = 10;
+    private const int LowFrequencyEdgeWeight = 4;
+    private const double MiddlePeakPosition = 0.62d;
 
     public const string DefaultVocabPath = "res://KaoyanEnglishMod/data/kaoyan_words_mod.json";
 
@@ -186,20 +188,29 @@ public sealed class KaoyanVocabService
     {
         if (word.Rank <= 0 || minRank <= 0 || maxRank <= 0)
         {
-            return MinimumEffectiveWeight;
+            return HighFrequencyEdgeWeight;
         }
 
         if (minRank == maxRank)
         {
-            return MaximumEffectiveWeight;
+            return MiddleEffectiveWeight;
         }
 
-        var position = (double)(word.Rank - minRank) / (maxRank - minRank);
-        var distanceFromMiddle = Math.Abs(position - 0.5d) * 2d;
-        var middleBoost = 1d - Math.Clamp(distanceFromMiddle, 0d, 1d);
-        var weight = MinimumEffectiveWeight + (MaximumEffectiveWeight - MinimumEffectiveWeight) * middleBoost;
+        var position = Math.Clamp((double)(word.Rank - minRank) / (maxRank - minRank), 0d, 1d);
+        double weight;
+        if (position <= MiddlePeakPosition)
+        {
+            var boost = position / MiddlePeakPosition;
+            weight = HighFrequencyEdgeWeight + (MiddleEffectiveWeight - HighFrequencyEdgeWeight) * boost;
+        }
+        else
+        {
+            var drop = (position - MiddlePeakPosition) / (1d - MiddlePeakPosition);
+            weight = MiddleEffectiveWeight - (MiddleEffectiveWeight - LowFrequencyEdgeWeight) * drop;
+        }
 
-        return Math.Max(MinimumEffectiveWeight, (int)Math.Round(weight, MidpointRounding.AwayFromZero));
+        var roundedWeight = (int)Math.Round(weight, MidpointRounding.AwayFromZero);
+        return Math.Clamp(roundedWeight, HighFrequencyEdgeWeight, MiddleEffectiveWeight);
     }
 
     private List<KaoyanWord> GetDistractors(KaoyanWord correctWord, int count)
