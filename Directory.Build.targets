@@ -1,0 +1,5 @@
+<Project>
+  <ItemGroup>
+    <Compile Remove="docs\**\*.cs" />
+  </ItemGroup>
+</Project>

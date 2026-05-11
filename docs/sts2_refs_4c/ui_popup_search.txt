@@ -1,0 +1,2070 @@
+﻿
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Assets\AssetSets.cs
+LineNumber : 108
+Line       : 		NVerticalPopup.AssetPaths,
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\AutoSlay\AutoSlayer.cs
+LineNumber : 366
+Line       : 			await WaitHelper.Until(() => NModalContainer.Instance?.OpenModal != null, ct, AutoSlayConfig.nodeWaitTi
+             meout, "Abandon run confirmation popup did not appear");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\AutoSlay\AutoSlayer.cs
+LineNumber : 367
+Line       : 			Node node2 = (Node)NModalContainer.Instance.OpenModal;
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\AutoSlay\AutoSlayer.cs
+LineNumber : 371
+Line       : 			await WaitHelper.Until(() => NModalContainer.Instance.OpenModal == null, ct, AutoSlayConfig.nodeWaitTim
+             eout, "Abandon run confirmation popup did not close");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Combat\CombatManager.cs
+LineNumber : 238
+Line       : 			NModalContainer.Instance?.Add(ftue, showBackstop: false);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Commands\CardPileCmd.cs
+LineNumber : 886
+Line       : 		if (!SaveManager.Instance.SeenFtue("shuffle_ftue") && NModalContainer.Instance != null)
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Commands\CardPileCmd.cs
+LineNumber : 889
+Line       : 			NModalContainer.Instance.Add(nShuffleFtue);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Models\Events\Trial.cs
+LineNumber : 130
+Line       : 		NModalContainer.Instance.Add(NAbandonRunConfirmPopup.Create(null));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Multiplayer\Game\ChecksumTracker.cs
+LineNumber : 137
+Line       : 				NModalContainer.Instance?.Add(nErrorPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\NActBanner.cs
+LineNumber : 51
+Line       : 		_actNumber.SetTextAutoSize(locString.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\NActBanner.cs
+LineNumber : 52
+Line       : 		_actName.SetTextAutoSize(_act.Title.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\NAncientNameBanner.cs
+LineNumber : 53
+Line       : 		_epithetLabel.SetTextAutoSize(_ancient.Epithet.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\NGame.cs
+LineNumber : 217
+Line       : 		if (nGenericPopup == null || NModalContainer.Instance == null)
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\NGame.cs
+LineNumber : 224
+Line       : 			NModalContainer.Instance.Add(nGenericPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\NGame.cs
+LineNumber : 805
+Line       : 		if (!NModalContainer.Instance.GetChildren().OfType<NErrorPopup>().Any())
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\NGame.cs
+LineNumber : 808
+Line       : 			NModalContainer.Instance.Add(modalToCreate);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\NGame.cs
+LineNumber : 830
+Line       : 			NModalContainer.Instance.Add(modalToCreate);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\NGame.cs
+LineNumber : 848
+Line       : 			NModalContainer.Instance.Add(modalToCreate);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\NGame.cs
+LineNumber : 867
+Line       : 			if (nGenericPopup == null || NModalContainer.Instance == null)
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\NGame.cs
+LineNumber : 873
+Line       : 			NModalContainer.Instance.Add(nGenericPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\NRun.cs
+LineNumber : 88
+Line       : 		_seedLabel.SetTextAutoSize(_state.Rng.StringSeed);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Cards\NCard.cs
+LineNumber : 390
+Line       : 			_descriptionLabel.SetTextAutoSize("[center]" + text + "[/center]");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Cards\NCard.cs
+LineNumber : 393
+Line       : 			_descriptionLabel.SetTextAutoSize("[center][font_size=40]" + _unknownDescription.GetFormattedText() + "
+             [/font_size][/center]");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Cards\NCard.cs
+LineNumber : 396
+Line       : 			_descriptionLabel.SetTextAutoSize("[center][font_size=40]" + _lockedDescription.GetFormattedText() + "[
+             /font_size][/center]");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Cards\NCard.cs
+LineNumber : 419
+Line       : 			_enchantmentLabel.SetTextAutoSize(enchantment.DisplayAmount.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Cards\NCard.cs
+LineNumber : 470
+Line       : 			_energyLabel.SetTextAutoSize("?");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Cards\NCard.cs
+LineNumber : 478
+Line       : 			_energyLabel.SetTextAutoSize("X");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Cards\NCard.cs
+LineNumber : 484
+Line       : 			_energyLabel.SetTextAutoSize(withModifiers.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Cards\NCard.cs
+LineNumber : 534
+Line       : 			_starLabel.SetTextAutoSize(string.Empty);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Cards\NCard.cs
+LineNumber : 542
+Line       : 			_starLabel.SetTextAutoSize("X");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Cards\NCard.cs
+LineNumber : 547
+Line       : 			_starLabel.SetTextAutoSize(Model.GetStarCostWithModifiers().ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Cards\NCard.cs
+LineNumber : 565
+Line       : 			_starLabel.SetTextAutoSize("X");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Cards\NCard.cs
+LineNumber : 570
+Line       : 			_starLabel.SetTextAutoSize(cost.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Cards\NCard.cs
+LineNumber : 632
+Line       : 				_energyLabel.SetTextAutoSize("?");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Cards\NCard.cs
+LineNumber : 636
+Line       : 				_energyLabel.SetTextAutoSize((t % 4f).ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Cards\NCard.cs
+LineNumber : 731
+Line       : 		_typeLabel.SetTextAutoSize(Model.Type.ToLocString().GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Cards\NCard.cs
+LineNumber : 782
+Line       : 		_titleLabel.SetTextAutoSize(textAutoSize);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Cards\Holders\NHandCardHolder.cs
+LineNumber : 184
+Line       : 		_handIndexLabel.SetTextAutoSize(i.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NCardPlay.cs
+LineNumber : 143
+Line       : 			NModalContainer.Instance.Add(NCannotPlayCardFtue.Create());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NCombatCardPile.cs
+LineNumber : 105
+Line       : 		_countLabel.SetTextAutoSize(_currentCount.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NCombatCardPile.cs
+LineNumber : 189
+Line       : 			_countLabel.SetTextAutoSize(_currentCount.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NCombatCardPile.cs
+LineNumber : 205
+Line       : 			_countLabel.SetTextAutoSize(_currentCount.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NCombatStartBanner.cs
+LineNumber : 42
+Line       : 		_label.SetTextAutoSize(new LocString("gameplay_ui", "BATTLE_START").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NCreatureStateDisplay.cs
+LineNumber : 93
+Line       : 		_nameplateLabel.SetTextAutoSize(creature.Name);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NCreatureStateDisplay.cs
+LineNumber : 127
+Line       : 			_nameplateLabel.SetTextAutoSize(_creature.Name);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NEndTurnButton.cs
+LineNumber : 209
+Line       : 				_label.SetTextAutoSize(new LocString("gameplay_ui", "UNDO_END_TURN_BUTTON").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NEndTurnButton.cs
+LineNumber : 229
+Line       : 			_label.SetTextAutoSize(_endTurnLoc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NEndTurnButton.cs
+LineNumber : 246
+Line       : 			_label.SetTextAutoSize(_endTurnLoc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NEndTurnButton.cs
+LineNumber : 354
+Line       : 			NModalContainer.Instance.Add(NCanPlayCardsFtue.Create());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NEnemyTurnBanner.cs
+LineNumber : 38
+Line       : 		_label.SetTextAutoSize(new LocString("gameplay_ui", "ENEMY_TURN").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NEnergyCounter.cs
+LineNumber : 108
+Line       : 		_label.SetTextAutoSize($"{playerCombatState.Energy}/{playerCombatState.MaxEnergy}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NHealthBar.cs
+LineNumber : 308
+Line       : 			_blockLabel.SetTextAutoSize(_creature.Block.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NHealthBar.cs
+LineNumber : 318
+Line       : 			_hpLabel.SetTextAutoSize(_healthBarDead.GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NHealthBar.cs
+LineNumber : 361
+Line       : 		_hpLabel.SetTextAutoSize($"{_creature.CurrentHp}/{_creature.MaxHp}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NPeekButton.cs
+LineNumber : 91
+Line       : 			NOverlayStack.Instance.HideBackstop();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NPeekButton.cs
+LineNumber : 135
+Line       : 				NOverlayStack.Instance.HideBackstop();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NPeekButton.cs
+LineNumber : 139
+Line       : 				NOverlayStack.Instance.ShowBackstop();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NPingButton.cs
+LineNumber : 70
+Line       : 		_label.SetTextAutoSize(locString.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NPlayerTurnBanner.cs
+LineNumber : 47
+Line       : 			_label.SetTextAutoSize(new LocString("gameplay_ui", "PLAYER_TURN_EXTRA").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NPlayerTurnBanner.cs
+LineNumber : 51
+Line       : 			_label.SetTextAutoSize(new LocString("gameplay_ui", "PLAYER_TURN").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NPlayerTurnBanner.cs
+LineNumber : 56
+Line       : 		_turnLabel.SetTextAutoSize(locString.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NPower.cs
+LineNumber : 116
+Line       : 			_amountLabel.SetTextAutoSize((Model.StackType == PowerStackType.Counter) ? Model.DisplayAmount.ToString
+             () : string.Empty);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Combat\NPower.cs
+LineNumber : 120
+Line       : 			_amountLabel.SetTextAutoSize(string.Empty);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NAbandonRunConfirmPopup.cs
+LineNumber : 16
+Line       : 	private NVerticalPopup _verticalPopup;
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NAbandonRunConfirmPopup.cs
+LineNumber : 30
+Line       : 		_verticalPopup = GetNode<NVerticalPopup>("VerticalPopup");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NAbandonRunConfirmPopup.cs
+LineNumber : 31
+Line       : 		_verticalPopup.SetText(new LocString("main_menu_ui", "ABANDON_RUN_CONFIRMATION.header"), new LocString("
+             main_menu_ui", "ABANDON_RUN_CONFIRMATION.body"));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NAbandonRunConfirmPopup.cs
+LineNumber : 32
+Line       : 		_verticalPopup.InitYesButton(new LocString("main_menu_ui", "GENERIC_POPUP.confirm"), OnYesButtonPressed)
+             ;
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NAbandonRunConfirmPopup.cs
+LineNumber : 33
+Line       : 		_verticalPopup.InitNoButton(new LocString("main_menu_ui", "GENERIC_POPUP.cancel"), OnNoButtonPressed);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NCardViewSortButton.cs
+LineNumber : 114
+Line       : 		_label.SetTextAutoSize(text);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NCommonBanner.cs
+LineNumber : 57
+Line       : 		label.SetTextAutoSize(text);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NControllerManager.cs
+LineNumber : 154
+Line       : 			_label.SetTextAutoSize(new LocString("main_menu_ui", "CONTROLLER_DETECTED").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NControllerManager.cs
+LineNumber : 158
+Line       : 			_label.SetTextAutoSize(new LocString("main_menu_ui", "MOUSE_DETECTED").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NDisconnectConfirmPopup.cs
+LineNumber : 30
+Line       : 	private NVerticalPopup _verticalPopup;
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NDisconnectConfirmPopup.cs
+LineNumber : 38
+Line       : 		_verticalPopup = GetNode<NVerticalPopup>("VerticalPopup");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NDisconnectConfirmPopup.cs
+LineNumber : 39
+Line       : 		_verticalPopup.SetText(new LocString("settings_ui", "DISCONNECT_CONFIRMATION.header"), new LocString("se
+             ttings_ui", "DISCONNECT_CONFIRMATION.body"));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NDisconnectConfirmPopup.cs
+LineNumber : 40
+Line       : 		_verticalPopup.InitNoButton(new LocString("main_menu_ui", "GENERIC_POPUP.cancel"), OnNoButtonPressed);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NDisconnectConfirmPopup.cs
+LineNumber : 41
+Line       : 		_verticalPopup.InitYesButton(new LocString("main_menu_ui", "GENERIC_POPUP.confirm"), OnYesButtonPressed)
+             ;
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NDropdownItem.cs
+LineNumber : 26
+Line       : 			_label.SetTextAutoSize(value);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NErrorPopup.cs
+LineNumber : 16
+Line       : public partial class NErrorPopup : NVerticalPopup, IScreenContext
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NErrorPopup.cs
+LineNumber : 18
+Line       : 	private NVerticalPopup _verticalPopup;
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NErrorPopup.cs
+LineNumber : 36
+Line       : 		_verticalPopup = GetNode<NVerticalPopup>("VerticalPopup");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NErrorPopup.cs
+LineNumber : 37
+Line       : 		_verticalPopup.SetText(_title, _body);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NErrorPopup.cs
+LineNumber : 40
+Line       : 			_verticalPopup.InitYesButton(new LocString("main_menu_ui", "NETWORK_ERROR.report_bug"), OnReportBugButt
+             onPressed);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NErrorPopup.cs
+LineNumber : 44
+Line       : 			_verticalPopup.InitYesButton(new LocString("main_menu_ui", "GENERIC_POPUP.ok"), OnOkButtonPressed);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NErrorPopup.cs
+LineNumber : 48
+Line       : 			_verticalPopup.InitNoButton(_cancel, OnCancelButtonPressed);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NLoadingOverlay.cs
+LineNumber : 11
+Line       : 		GetNode<MegaLabel>("%Label").SetTextAutoSize(new LocString("main_menu_ui", "LOADING_OVERLAY.label").GetF
+             ormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NModalContainer.cs
+LineNumber : 8
+Line       : public partial class NModalContainer : Control
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NModalContainer.cs
+LineNumber : 14
+Line       : 	public static NModalContainer? Instance { get; private set; }
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NModalContainer.cs
+LineNumber : 22
+Line       : 			Log.Error("NModalContainer already exists.");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NModalContainer.cs
+LineNumber : 32
+Line       : 	public void Add(Node modalToCreate, bool showBackstop = true)
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NModalContainer.cs
+LineNumber : 42
+Line       : 		if (showBackstop)
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NModalContainer.cs
+LineNumber : 44
+Line       : 			ShowBackstop();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NModalContainer.cs
+LineNumber : 59
+Line       : 		HideBackstop();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NModalContainer.cs
+LineNumber : 62
+Line       : 	public void ShowBackstop()
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NModalContainer.cs
+LineNumber : 71
+Line       : 	public void HideBackstop()
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NPopupYesNoButton.cs
+LineNumber : 84
+Line       : 	public void SetText(string text)
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NPopupYesNoButton.cs
+LineNumber : 86
+Line       : 		_label.SetTextAutoSize(text);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NProceedButton.cs
+LineNumber : 172
+Line       : 		_label.SetTextAutoSize(loc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NSaveIndicator.cs
+LineNumber : 15
+Line       : 		GetNode<MegaRichTextLabel>("Label").SetTextAutoSize(new LocString("gameplay_ui", "GAME_SAVED").GetFormat
+             tedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NSettingsScreenPopup.cs
+LineNumber : 23
+Line       : 	public NVerticalPopup VerticalPopup { get; private set; }
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NSettingsScreenPopup.cs
+LineNumber : 41
+Line       : 		VerticalPopup = GetNode<NVerticalPopup>("VerticalPopup");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NSettingsScreenPopup.cs
+LineNumber : 42
+Line       : 		VerticalPopup.InitNoButton(new LocString("main_menu_ui", "GENERIC_POPUP.cancel"), delegate
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NSettingsScreenPopup.cs
+LineNumber : 45
+Line       : 		VerticalPopup.InitYesButton(new LocString("main_menu_ui", "GENERIC_POPUP.confirm"), OnYesButtonPressed);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NSettingsScreenPopup.cs
+LineNumber : 46
+Line       : 		VerticalPopup.SetText(_header, _description);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NTopBar.cs
+LineNumber : 116
+Line       : 			_ascensionLabel.SetTextAutoSize(runState.AscensionLevel.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NVerticalPopup.cs
+LineNumber : 11
+Line       : public partial class NVerticalPopup : Control
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NVerticalPopup.cs
+LineNumber : 48
+Line       : 	public void SetText(LocString title, LocString body)
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NVerticalPopup.cs
+LineNumber : 51
+Line       : 		TitleLabel.SetTextAutoSize(title.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NVerticalPopup.cs
+LineNumber : 55
+Line       : 	public void SetText(string title, string body)
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NVerticalPopup.cs
+LineNumber : 58
+Line       : 		TitleLabel.SetTextAutoSize(title);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NVerticalPopup.cs
+LineNumber : 62
+Line       : 	public void InitYesButton(LocString yesButton, Action<NButton> onPressed)
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NVerticalPopup.cs
+LineNumber : 67
+Line       : 		YesButton.SetText(yesButton.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NVerticalPopup.cs
+LineNumber : 72
+Line       : 	public void InitNoButton(LocString noButton, Action<NButton> onPressed)
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NVerticalPopup.cs
+LineNumber : 78
+Line       : 		NoButton.SetText(noButton.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\CommonUi\NVerticalPopup.cs
+LineNumber : 85
+Line       : 		NModalContainer.Instance.Clear();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Debug\NDebugInfoLabelManager.cs
+LineNumber : 90
+Line       : 			_moddedWarning.SetTextAutoSize(locString.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Debug\NDebugInfoLabelManager.cs
+LineNumber : 118
+Line       : 			_moddedWarning.SetTextAutoSize($"MODDED ({ModManager.GetLoadedMods().Count()})");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Events\NAncientEventLayout.cs
+LineNumber : 271
+Line       : 			_fakeNextButtonLabel.SetTextAutoSize(locString.GetFormattedText() ?? "");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Events\NDivinationButton.cs
+LineNumber : 39
+Line       : 		_label.SetTextAutoSize(loc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Events\NEventLayout.cs
+LineNumber : 56
+Line       : 		_sharedEventLabel?.SetTextAutoSize(_sharedEventLoc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Events\NEventLayout.cs
+LineNumber : 58
+Line       : 		_description?.SetText(string.Empty);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Events\NEventLayout.cs
+LineNumber : 124
+Line       : 			_description.SetTextAutoSize(description);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Events\NEventOptionButton.cs
+LineNumber : 128
+Line       : 			node.SetTexture(Option.Relic.Icon);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Events\NEventOptionButton.cs
+LineNumber : 129
+Line       : 			node.GetNode<TextureRect>("%Outline").SetTexture(Option.Relic.IconOutline);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Events\Custom\CrystalSphere\NCrystalSphereScreen.cs
+LineNumber : 94
+Line       : 		_instructionsTitleLabel.SetTextAutoSize(_instructionsTitleLoc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Events\Custom\CrystalSphere\NCrystalSphereScreen.cs
+LineNumber : 95
+Line       : 		_instructionsDescriptionLabel.SetTextAutoSize(_instructionsDescriptionLoc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NAcceptTutorialsFtue.cs
+LineNumber : 22
+Line       : 	private NVerticalPopup _verticalPopup;
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NAcceptTutorialsFtue.cs
+LineNumber : 28
+Line       : 		_verticalPopup = GetNode<NVerticalPopup>("VerticalPopup");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NAcceptTutorialsFtue.cs
+LineNumber : 29
+Line       : 		_verticalPopup.SetText(new LocString("main_menu_ui", "ENABLE_TUTORIALS.title"), new LocString("main_menu
+             _ui", "ENABLE_TUTORIALS.description"));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NAcceptTutorialsFtue.cs
+LineNumber : 30
+Line       : 		_verticalPopup.InitYesButton(new LocString("main_menu_ui", "GENERIC_POPUP.confirm"), YesTutorials);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NAcceptTutorialsFtue.cs
+LineNumber : 31
+Line       : 		_verticalPopup.InitNoButton(new LocString("main_menu_ui", "GENERIC_POPUP.cancel"), NoTutorials);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NCannotPlayCardFtue.cs
+LineNumber : 31
+Line       : 		_header.SetTextAutoSize(new LocString("ftues", "CANNOT_PLAY_CARD_FTUE_TITLE").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NCanPlayCardsFtue.cs
+LineNumber : 28
+Line       : 		_header.SetTextAutoSize(new LocString("ftues", "CAN_PLAY_CARDS_FTUE_TITLE").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NCombatRewardFtue.cs
+LineNumber : 32
+Line       : 		_header.SetTextAutoSize(new LocString("ftues", "REWARDS_FTUE_TITLE").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NCombatRulesFtue.cs
+LineNumber : 80
+Line       : 		NModalContainer.Instance?.ShowBackstop();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NCombatRulesFtue.cs
+LineNumber : 89
+Line       : 		_pageCount.SetTextAutoSize(locString.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NCombatRulesFtue.cs
+LineNumber : 90
+Line       : 		_header.SetTextAutoSize(new LocString("ftues", "COMBAT_BASICS_FTUE_HEADER").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NCombatRulesFtue.cs
+LineNumber : 140
+Line       : 			_bodyText.SetTextAutoSize(new LocString("ftues", "TUTORIAL_FTUE_BODY_1").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NCombatRulesFtue.cs
+LineNumber : 144
+Line       : 			_bodyText.SetTextAutoSize(new LocString("ftues", "TUTORIAL_FTUE_BODY_2").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NCombatRulesFtue.cs
+LineNumber : 151
+Line       : 		_pageCount.SetTextAutoSize(locString.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NCombatRulesFtue.cs
+LineNumber : 182
+Line       : 			_bodyText.SetTextAutoSize(new LocString("ftues", "TUTORIAL_FTUE_BODY_2").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NCombatRulesFtue.cs
+LineNumber : 186
+Line       : 			_bodyText.SetTextAutoSize(new LocString("ftues", "TUTORIAL_FTUE_BODY_3").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NCombatRulesFtue.cs
+LineNumber : 193
+Line       : 		_pageCount.SetTextAutoSize(locString.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NFtue.cs
+LineNumber : 29
+Line       : 		NModalContainer.Instance.Clear();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NFtueConfirmButton.cs
+LineNumber : 32
+Line       : 		_label.SetTextAutoSize(new LocString("ftues", "CONFIRM_BUTTON").GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NMapSelectFtue.cs
+LineNumber : 33
+Line       : 		_header.SetTextAutoSize(new LocString("ftues", "MAP_SELECT_TITLE").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NMerchantFtue.cs
+LineNumber : 34
+Line       : 		_header.SetTextAutoSize(new LocString("ftues", "MERCHANT_FTUE_TITLE").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NObtainPotionFtue.cs
+LineNumber : 29
+Line       : 		_header.SetTextAutoSize(new LocString("ftues", "POTION_FTUE_TITLE").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NPowerCardFtue.cs
+LineNumber : 33
+Line       : 		_header.SetTextAutoSize(new LocString("ftues", "POWER_FTUE_TITLE").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NRelicRewardFtue.cs
+LineNumber : 34
+Line       : 		_header.SetTextAutoSize(new LocString("ftues", "RELIC_FTUE_TITLE").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NRestSiteFtue.cs
+LineNumber : 33
+Line       : 		_header.SetTextAutoSize(new LocString("ftues", "REST_SITE_FTUE_TITLE").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Ftue\NShuffleFtue.cs
+LineNumber : 32
+Line       : 		_header.SetTextAutoSize(new LocString("ftues", "SHUFFLE_FTUE_TITLE").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\HoverTips\NHoverTipSet.cs
+LineNumber : 141
+Line       : 					node.SetTextAutoSize(hoverTip.Title);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\HoverTips\NMapPointHistoryHoverTip.cs
+LineNumber : 124
+Line       : 		_rewardStatsContainer.GetNode<MegaLabel>("Header").SetTextAutoSize(_rewardsHeaderLoc.GetFormattedText())
+             ;
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\HoverTips\NMapPointHistoryHoverTip.cs
+LineNumber : 125
+Line       : 		_skippedStatsContainer.GetNode<MegaLabel>("Header").SetTextAutoSize(_skippedHeaderLoc.GetFormattedText()
+             );
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\HoverTips\NMapPointHistoryHoverTip.cs
+LineNumber : 127
+Line       : 		_titleLabel.SetTextAutoSize(_floorTitle.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NGenericPopup.cs
+LineNumber : 18
+Line       : 	private NVerticalPopup _verticalPopup;
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NGenericPopup.cs
+LineNumber : 39
+Line       : 		_verticalPopup = GetNode<NVerticalPopup>("VerticalPopup");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NGenericPopup.cs
+LineNumber : 41
+Line       : 		_verticalPopup.SetText(header, body);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NGenericPopup.cs
+LineNumber : 42
+Line       : 		_verticalPopup.InitYesButton(yesButton, OnYesButtonPressed);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NGenericPopup.cs
+LineNumber : 45
+Line       : 			_verticalPopup.InitNoButton(noButton, OnNoButtonPressed);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NInvitePlayersButton.cs
+LineNumber : 33
+Line       : 		node2.SetTextAutoSize(new LocString("main_menu_ui", "INVITE").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NMultiplayerPlayerState.cs
+LineNumber : 136
+Line       : 		_nameplateLabel.SetTextAutoSize(PlatformUtil.GetPlayerName(RunManager.Instance.NetService.Platform, Play
+             er.NetId));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NMultiplayerPlayerState.cs
+LineNumber : 352
+Line       : 		_energyCount.SetTextAutoSize(Player.PlayerCombatState.Energy.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NMultiplayerPlayerState.cs
+LineNumber : 353
+Line       : 		_starCount.SetTextAutoSize(Player.PlayerCombatState.Stars.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NMultiplayerPlayerState.cs
+LineNumber : 354
+Line       : 		_cardCount.SetTextAutoSize(Player.PlayerCombatState.Hand.Cards.Count.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NMultiplayerTimeoutOverlay.cs
+LineNumber : 38
+Line       : 		node.SetTextAutoSize(new LocString("main_menu_ui", "TIMEOUT_OVERLAY.title").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NMultiplayerTimeoutOverlay.cs
+LineNumber : 39
+Line       : 		node2.SetTextAutoSize(new LocString("main_menu_ui", "TIMEOUT_OVERLAY.description").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NMultiplayerWarningPopup.cs
+LineNumber : 14
+Line       : public partial class NMultiplayerWarningPopup : NVerticalPopup, IScreenContext
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NMultiplayerWarningPopup.cs
+LineNumber : 18
+Line       : 	private NVerticalPopup _verticalPopup;
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NMultiplayerWarningPopup.cs
+LineNumber : 37
+Line       : 		_verticalPopup = GetNode<NVerticalPopup>("VerticalPopup");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NMultiplayerWarningPopup.cs
+LineNumber : 38
+Line       : 		_verticalPopup.SetText(new LocString("main_menu_ui", "MULTIPLAYER_WARNING_POPUP.title"), new LocString("
+             main_menu_ui", "MULTIPLAYER_WARNING_POPUP.body"));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NMultiplayerWarningPopup.cs
+LineNumber : 39
+Line       : 		_verticalPopup.InitYesButton(new LocString("main_menu_ui", "MULTIPLAYER_WARNING_POPUP.back"), OnBackButt
+             onPressed);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NMultiplayerWarningPopup.cs
+LineNumber : 40
+Line       : 		_verticalPopup.InitNoButton(new LocString("main_menu_ui", "MULTIPLAYER_WARNING_POPUP.ignore"), OnIgnoreB
+             uttonPressed);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NMultiplayerWarningPopup.cs
+LineNumber : 47
+Line       : 		NModalContainer.Instance.HideBackstop();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NMultiplayerWarningPopup.cs
+LineNumber : 54
+Line       : 		NModalContainer.Instance.HideBackstop();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NRemoteLobbyPlayer.cs
+LineNumber : 83
+Line       : 			_nameplateLabel.SetTextAutoSize(PlatformUtil.GetPlayerName(_platform, _playerId));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NRemoteLobbyPlayer.cs
+LineNumber : 87
+Line       : 			_characterLabel.SetTextAutoSize(string.Empty);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NRemoteLobbyPlayer.cs
+LineNumber : 114
+Line       : 			_nameplateLabel.SetTextAutoSize(_character.Title.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NRemoteLobbyPlayer.cs
+LineNumber : 118
+Line       : 			_characterLabel.SetTextAutoSize(_character.Title.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Multiplayer\NRemoteLobbyPlayerContainer.cs
+LineNumber : 32
+Line       : 		_soloLabel.SetTextAutoSize(new LocString("main_menu_ui", "MULTIPLAYER_CHAR_SELECT.SOLO").GetFormattedTex
+             t());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Orbs\NOrb.cs
+LineNumber : 152
+Line       : 					_passiveLabel.SetTextAutoSize(Model.PassiveVal.ToString("0"));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Orbs\NOrb.cs
+LineNumber : 153
+Line       : 					_evokeLabel.SetTextAutoSize(Model.EvokeVal.ToString("0"));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Orbs\NOrb.cs
+LineNumber : 159
+Line       : 					_passiveLabel.SetTextAutoSize(Model.PassiveVal.ToString("0"));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Orbs\NOrb.cs
+LineNumber : 160
+Line       : 					_evokeLabel.SetTextAutoSize(Model.EvokeVal.ToString("0"));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Orbs\NOrb.cs
+LineNumber : 167
+Line       : 				_passiveLabel.SetTextAutoSize(Model.PassiveVal.ToString("0"));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Orbs\NOrb.cs
+LineNumber : 168
+Line       : 				_evokeLabel.SetTextAutoSize(Model.EvokeVal.ToString("0"));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Potions\NPotionContainer.cs
+LineNumber : 195
+Line       : 			NModalContainer.Instance.Add(NObtainPotionFtue.Create());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Potions\NPotionPopupButton.cs
+LineNumber : 27
+Line       : 		_label.SetTextAutoSize(new LocString("gameplay_ui", locEntryKey).GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Relics\NRelicInventoryHolder.cs
+LineNumber : 112
+Line       : 			_amountLabel.SetTextAutoSize(_relic.Model.DisplayAmount.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\RestSite\NRestSiteButton.cs
+LineNumber : 109
+Line       : 			_label.SetTextAutoSize(Option.Title.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\RestSite\NRestSiteButton.cs
+LineNumber : 216
+Line       : 				instance.SetText(Option.Description.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\RestSite\NRestSiteCharacter.cs
+LineNumber : 221
+Line       : 			_thoughtBubbleVfx.SetTexture(restSiteOption.Icon);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Rooms\NCombatRoom.cs
+LineNumber : 143
+Line       : 		_waitingForOtherPlayersOverlay.GetNode<MegaLabel>("Label").SetTextAutoSize(_waitingLoc.GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Rooms\NMerchantRoom.cs
+LineNumber : 168
+Line       : 			NModalContainer.Instance.Add(NMerchantFtue.Create(this));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Rooms\NRestSiteRoom.cs
+LineNumber : 127
+Line       : 		Header.SetTextAutoSize(new LocString("rest_site_ui", "PROMPT").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Rooms\NRestSiteRoom.cs
+LineNumber : 199
+Line       : 			NModalContainer.Instance.Add(NRestSiteFtue.Create(_choicesContainer));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Rooms\NRestSiteRoom.cs
+LineNumber : 359
+Line       : 	public void SetText(string formattedText)
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Rooms\NTreasureRoom.cs
+LineNumber : 90
+Line       : 			_banner.label.SetTextAutoSize(new LocString("gameplay_ui", "TREASURE_BANNER").GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Rooms\NTreasureRoom.cs
+LineNumber : 94
+Line       : 			_banner.label.SetTextAutoSize(new LocString("gameplay_ui", "CHOOSE_SHARED_RELIC_HEADER").GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Rooms\NTreasureRoom.cs
+LineNumber : 240
+Line       : 			NModalContainer.Instance.Add(NRelicRewardFtue.Create(relicReward));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\NChooseARelicSelection.cs
+LineNumber : 76
+Line       : 		_banner.label.SetTextAutoSize(new LocString("gameplay_ui", "CHOOSE_RELIC_HEADER").GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\NDeckViewScreen.cs
+LineNumber : 83
+Line       : 		GetNode<MegaLabel>("%ViewUpgradesLabel").SetTextAutoSize(new LocString("gameplay_ui", "VIEW_UPGRADES").G
+             etFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\NInspectCardScreen.cs
+LineNumber : 93
+Line       : 		GetNode<MegaLabel>("%ShowUpgradeLabel").SetTextAutoSize(new LocString("card_selection", "VIEW_UPGRADES")
+             .GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\NRewardsScreen.cs
+LineNumber : 128
+Line       : 		_waitingForOtherPlayersOverlay.GetNode<MegaLabel>("Label").SetTextAutoSize(_waitingLoc.GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\NRewardsScreen.cs
+LineNumber : 147
+Line       : 			_headerLabel.SetTextAutoSize(new LocString("gameplay_ui", "COMBAT_REWARD_HEADER_MUGGED").GetFormattedTe
+             xt());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\NRewardsScreen.cs
+LineNumber : 151
+Line       : 			_headerLabel.SetTextAutoSize(new LocString("gameplay_ui", "COMBAT_REWARD_HEADER_LOOT").GetFormattedText
+             ());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\NRewardsScreen.cs
+LineNumber : 221
+Line       : 				NModalContainer.Instance.Add(NRelicRewardFtue.Create(item));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\NRewardsScreen.cs
+LineNumber : 262
+Line       : 				NOverlayStack.Instance.HideBackstop();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\NRewardsScreen.cs
+LineNumber : 382
+Line       : 				NOverlayStack.Instance.HideBackstop();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\NRewardsScreen.cs
+LineNumber : 475
+Line       : 		NModalContainer.Instance.Add(nCombatRewardFtue);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\NShareButton.cs
+LineNumber : 14
+Line       : 		GetNode<MegaLabel>("%ShareLabel").SetTextAutoSize(new LocString("main_menu_ui", "RUN_HISTORY.SHARE.title
+             ").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\NSimpleCardsViewScreen.cs
+LineNumber : 39
+Line       : 		GetNode<MegaLabel>("%ViewUpgradesLabel").SetTextAutoSize(new LocString("gameplay_ui", "VIEW_UPGRADES").G
+             etFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Bestiary\NBestiary.cs
+LineNumber : 87
+Line       : 		GetNode<MegaLabel>("%MoveHeader").SetTextAutoSize(new LocString("bestiary", "ACTIONS.header").GetFormatt
+             edText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Bestiary\NBestiaryMoveButton.cs
+LineNumber : 25
+Line       : 		_label.SetTextAutoSize(Move.moveName);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CardLibrary\NCardRarityTickbox.cs
+LineNumber : 74
+Line       : 		_label.SetTextAutoSize(text);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CardLibrary\NLibraryStatTickbox.cs
+LineNumber : 56
+Line       : 		_label.SetTextAutoSize(text);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CardSelection\NCardRewardAlternativeButton.cs
+LineNumber : 61
+Line       : 			_label.SetTextAutoSize(_optionName);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CardSelection\NCardRewardSelectionScreen.cs
+LineNumber : 102
+Line       : 		_banner.label.SetTextAutoSize(new LocString("gameplay_ui", "CHOOSE_CARD_HEADER").GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CardSelection\NCardRewardSelectionScreen.cs
+LineNumber : 263
+Line       : 				NModalContainer.Instance.Add(NPowerCardFtue.Create(nGridCardHolder));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CardSelection\NCardRewardSelectionScreen.cs
+LineNumber : 288
+Line       : 		_inspectPrompt.GetNode<MegaLabel>("Label").SetTextAutoSize(new LocString("gameplay_ui", "TO_INSPECT_PROM
+             PT").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CardSelection\NChoiceSelectionSkipButton.cs
+LineNumber : 53
+Line       : 			_label.SetTextAutoSize(_optionName);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CardSelection\NChooseABundleSelectionScreen.cs
+LineNumber : 79
+Line       : 		_banner.label.SetTextAutoSize(new LocString("gameplay_ui", "CHOOSE_A_PACK").GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CardSelection\NChooseACardSelectionScreen.cs
+LineNumber : 100
+Line       : 		_banner.label.SetTextAutoSize(new LocString("gameplay_ui", "CHOOSE_CARD_HEADER").GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CardSelection\NChooseACardSelectionScreen.cs
+LineNumber : 268
+Line       : 		_inspectPrompt.GetNode<MegaLabel>("Label").SetTextAutoSize(new LocString("gameplay_ui", "TO_INSPECT_PROM
+             PT").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CardSelection\NDeckEnchantSelectScreen.cs
+LineNumber : 128
+Line       : 		_enchantmentTitle.SetTextAutoSize(enchantmentModel.Title.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CardSelection\NDeckTransformSelectScreen.cs
+LineNumber : 110
+Line       : 		GetNode<MegaLabel>("%ViewUpgradesLabel").SetTextAutoSize(new LocString("card_selection", "VIEW_UPGRADES"
+             ).GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CardSelection\NDeckUpgradeSelectScreen.cs
+LineNumber : 129
+Line       : 		GetNode<MegaLabel>("%ViewUpgradesLabel").SetTextAutoSize(new LocString("card_selection", "VIEW_UPGRADES"
+             ).GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CharacterSelect\NActDropdown.cs
+LineNumber : 56
+Line       : 		_currentOptionLabel.SetTextAutoSize(item.Text);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CharacterSelect\NAscensionPanel.cs
+LineNumber : 184
+Line       : 		_ascensionLevel.SetTextAutoSize(Ascension.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CharacterSelect\NCharacterSelectScreen.cs
+LineNumber : 365
+Line       : 			NModalContainer.Instance.Add(NAcceptTutorialsFtue.Create(this, delegate
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CharacterSelect\NCharacterSelectScreen.cs
+LineNumber : 514
+Line       : 			_name.SetTextAutoSize(formattedText);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CharacterSelect\NCharacterSelectScreen.cs
+LineNumber : 518
+Line       : 				_hp.SetTextAutoSize($"{characterModel.StartingHp}/{characterModel.StartingHp}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CharacterSelect\NCharacterSelectScreen.cs
+LineNumber : 519
+Line       : 				_gold.SetTextAutoSize($"{characterModel.StartingGold}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CharacterSelect\NCharacterSelectScreen.cs
+LineNumber : 530
+Line       : 				_hp.SetTextAutoSize("??/??");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CharacterSelect\NCharacterSelectScreen.cs
+LineNumber : 531
+Line       : 				_gold.SetTextAutoSize("???");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CharacterSelect\NCharacterSelectScreen.cs
+LineNumber : 547
+Line       : 			_name.SetTextAutoSize(formattedText2);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CharacterSelect\NCharacterSelectScreen.cs
+LineNumber : 549
+Line       : 			_hp.SetTextAutoSize("??/??");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CharacterSelect\NCharacterSelectScreen.cs
+LineNumber : 550
+Line       : 			_gold.SetTextAutoSize("???");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CharacterSelect\NCharacterSelectScreen.cs
+LineNumber : 719
+Line       : 				NModalContainer.Instance.Add(nErrorPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CharacterSelect\NMultiplayerLoadGameScreen.cs
+LineNumber : 213
+Line       : 		NModalContainer.Instance.Add(nGenericPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CharacterSelect\NMultiplayerLoadGameScreen.cs
+LineNumber : 279
+Line       : 				NModalContainer.Instance.Add(nErrorPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CharacterSelect\NMultiplayerLoadGameScreen.cs
+LineNumber : 299
+Line       : 		_name.SetTextAutoSize(byId.Title.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CharacterSelect\NMultiplayerLoadGameScreen.cs
+LineNumber : 300
+Line       : 		_hp.SetTextAutoSize($"{serializablePlayer.CurrentHp}/{serializablePlayer.MaxHp}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CharacterSelect\NMultiplayerLoadGameScreen.cs
+LineNumber : 301
+Line       : 		_gold.SetTextAutoSize($"{serializablePlayer.Gold}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Credits\NCreditsScreen.cs
+LineNumber : 265
+Line       : 		NModalContainer.Instance.Clear();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CustomRun\NCustomRunLoadScreen.cs
+LineNumber : 82
+Line       : 		GetNode<MegaLabel>("%CustomModeTitle").SetTextAutoSize(new LocString("main_menu_ui", "CUSTOM_RUN_SCREEN.
+             CUSTOM_MODE_TITLE").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CustomRun\NCustomRunLoadScreen.cs
+LineNumber : 83
+Line       : 		GetNode<MegaLabel>("%ModifiersTitle").SetTextAutoSize(new LocString("main_menu_ui", "CUSTOM_RUN_SCREEN.M
+             ODIFIERS_TITLE").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CustomRun\NCustomRunLoadScreen.cs
+LineNumber : 84
+Line       : 		GetNode<MegaLabel>("%SeedLabel").SetTextAutoSize(new LocString("main_menu_ui", "CUSTOM_RUN_SCREEN.SEED_L
+             ABEL").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CustomRun\NCustomRunLoadScreen.cs
+LineNumber : 198
+Line       : 		NModalContainer.Instance.Add(nGenericPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CustomRun\NCustomRunLoadScreen.cs
+LineNumber : 262
+Line       : 				NModalContainer.Instance.Add(nErrorPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CustomRun\NCustomRunScreen.cs
+LineNumber : 105
+Line       : 		_disclaimer.SetTextAutoSize(new LocString("main_menu_ui", "CUSTOM_RUN_SCREEN.disclaimer").GetFormattedTe
+             xt());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CustomRun\NCustomRunScreen.cs
+LineNumber : 106
+Line       : 		GetNode<MegaLabel>("%CustomModeTitle").SetTextAutoSize(new LocString("main_menu_ui", "CUSTOM_RUN_SCREEN.
+             CUSTOM_MODE_TITLE").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CustomRun\NCustomRunScreen.cs
+LineNumber : 107
+Line       : 		GetNode<MegaLabel>("%ModifiersTitle").SetTextAutoSize(new LocString("main_menu_ui", "CUSTOM_RUN_SCREEN.M
+             ODIFIERS_TITLE").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CustomRun\NCustomRunScreen.cs
+LineNumber : 108
+Line       : 		GetNode<MegaLabel>("%SeedLabel").SetTextAutoSize(new LocString("main_menu_ui", "CUSTOM_RUN_SCREEN.SEED_L
+             ABEL").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\CustomRun\NCustomRunScreen.cs
+LineNumber : 477
+Line       : 				NModalContainer.Instance.Add(nErrorPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunCharacterContainer.cs
+LineNumber : 49
+Line       : 		_characterNameLabel.SetTextAutoSize(character.Title.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunCharacterContainer.cs
+LineNumber : 50
+Line       : 		_playerNameLabel.SetTextAutoSize(PlatformUtil.GetPlayerName(netService.Platform, playerId));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunCharacterContainer.cs
+LineNumber : 51
+Line       : 		_ascensionLabel.SetTextAutoSize(_ascensionLoc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunCharacterContainer.cs
+LineNumber : 52
+Line       : 		_ascensionNumberLabel.SetTextAutoSize(ascension.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunLeaderboard.cs
+LineNumber : 70
+Line       : 		_loadingIndicator.SetTextAutoSize(_fetchingScoreLoc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunLeaderboard.cs
+LineNumber : 83
+Line       : 		GetNodeOrNull<MegaLabel>("%Title")?.SetTextAutoSize(_titleLoc.GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunLeaderboard.cs
+LineNumber : 84
+Line       : 		_noScoresIndicator.SetTextAutoSize(_scoreLoc.GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunLeaderboard.cs
+LineNumber : 85
+Line       : 		_noFriendsIndicator.SetTextAutoSize(_friendsLoc.GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunLeaderboardHeader.cs
+LineNumber : 32
+Line       : 		_name.SetTextAutoSize(new LocString("main_menu_ui", "LEADERBOARDS.nameHeader").GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunLeaderboardRow.cs
+LineNumber : 58
+Line       : 		_rank.SetTextAutoSize($"{_entry.rank + 1}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunLeaderboardRow.cs
+LineNumber : 59
+Line       : 		_name.SetTextAutoSize(string.Join(",", values));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunLeaderboardRow.cs
+LineNumber : 64
+Line       : 		_floor.SetTextAutoSize($"{decodedDailyScore.floors}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunLeaderboardRow.cs
+LineNumber : 69
+Line       : 		_badges.SetTextAutoSize($"{decodedDailyScore.badges}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunLeaderboardRow.cs
+LineNumber : 70
+Line       : 		_time.SetTextAutoSize(FormatHoursAndMinutes(decodedDailyScore.runTime));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunLoadScreen.cs
+LineNumber : 171
+Line       : 		_dateLabel.SetTextAutoSize(value.ToString(dateFormat));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunLoadScreen.cs
+LineNumber : 234
+Line       : 		NModalContainer.Instance.Add(nGenericPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunLoadScreen.cs
+LineNumber : 302
+Line       : 				NModalContainer.Instance.Add(nErrorPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunScreen.cs
+LineNumber : 111
+Line       : 		_titleLabel.SetTextAutoSize(new LocString("main_menu_ui", "DAILY_RUN_MENU.DAILY_TITLE").GetFormattedText
+             ());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunScreen.cs
+LineNumber : 112
+Line       : 		_disclaimer.SetTextAutoSize(new LocString("main_menu_ui", "DAILY_RUN_MENU.disclaimer").GetFormattedText(
+             ));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunScreen.cs
+LineNumber : 113
+Line       : 		_modifiersTitleLabel.SetTextAutoSize(new LocString("main_menu_ui", "DAILY_RUN_MENU.MODIFIERS").GetFormat
+             tedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunScreen.cs
+LineNumber : 114
+Line       : 		_dateLabel.SetTextAutoSize(new LocString("main_menu_ui", "DAILY_RUN_MENU.FETCHING_TIME").GetFormattedTex
+             t());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NDailyRunScreen.cs
+LineNumber : 472
+Line       : 				NModalContainer.Instance.Add(nErrorPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NLeaderboardDayPaginator.cs
+LineNumber : 82
+Line       : 		_vfxLabel.SetTextAutoSize(_label.Text);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\DailyRun\NLeaderboardDayPaginator.cs
+LineNumber : 97
+Line       : 		_label.SetTextAutoSize(_currentDay.ToString(NDailyRunScreen.dateFormat));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\FeedbackScreen\NFeedbackCategoryDropdown.cs
+LineNumber : 38
+Line       : 		_currentOptionLabel.SetTextAutoSize(_categoryLoc[_currentCategoryIndex].GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\FeedbackScreen\NFeedbackCategoryDropdown.cs
+LineNumber : 82
+Line       : 			_currentOptionLabel.SetTextAutoSize(_categoryLoc[_currentCategoryIndex].GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\FeedbackScreen\NSendFeedbackScreen.cs
+LineNumber : 174
+Line       : 		_categoryLabel.SetTextAutoSize(new LocString("settings_ui", "FEEDBACK_CATEGORY_LABEL").GetFormattedText(
+             ));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\FeedbackScreen\NSendFeedbackScreen.cs
+LineNumber : 175
+Line       : 		_emojiLabel.SetTextAutoSize(new LocString("settings_ui", "FEEDBACK_EMOJI_LABEL").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\FeedbackScreen\NSendFeedbackScreen.cs
+LineNumber : 176
+Line       : 		_sendLabel.SetTextAutoSize(new LocString("settings_ui", "FEEDBACK_SEND_BUTTON_LABEL").GetFormattedText()
+             );
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\FeedbackScreen\NSendFeedbackScreen.cs
+LineNumber : 422
+Line       : 		_successLabel.SetTextAutoSize(new LocString("settings_ui", "FEEDBACK_SEND_SUCCESS_LABEL").GetFormattedTe
+             xt());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\GameOverScreen\NGameOverContinueButton.cs
+LineNumber : 44
+Line       : 		GetNode<MegaLabel>("Label").SetTextAutoSize(new LocString("game_over_screen", "BUTTON.continue").GetForm
+             attedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\GameOverScreen\NGameOverScreen.cs
+LineNumber : 158
+Line       : 		_discoveryLabel.SetTextAutoSize(new LocString("game_over_screen", "DISCOVERY_HEADER").GetFormattedText()
+             );
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\GameOverScreen\NGameOverScreen.cs
+LineNumber : 178
+Line       : 			_banner.label.SetTextAutoSize(new LocString("game_over_screen", "BANNER.falseWin").GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\GameOverScreen\NGameOverScreen.cs
+LineNumber : 210
+Line       : 			_banner.label.SetTextAutoSize(Rng.Chaotic.NextItem(locStringsWithPrefix).GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\GameOverScreen\NGameOverScreen.cs
+LineNumber : 390
+Line       : 		_unlocksRemaining.SetTextAutoSize(locString.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\GameOverScreen\NGameOverScreen.cs
+LineNumber : 395
+Line       : 			_scoreProgress.SetTextAutoSize($"[{currentScore}/{_scoreThreshold}]");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\GameOverScreen\NGameOverScreen.cs
+LineNumber : 408
+Line       : 				node.SetTextAutoSize(new LocString("game_over_screen", locEntryKey).GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\GameOverScreen\NGameOverScreen.cs
+LineNumber : 429
+Line       : 				_unlocksRemaining.SetTextAutoSize(locString2.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\GameOverScreen\NGameOverScreen.cs
+LineNumber : 489
+Line       : 		_scoreProgress.SetTextAutoSize($"[{value}/{_scoreThreshold}]");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\GameOverScreen\NReturnToMainMenuButton.cs
+LineNumber : 51
+Line       : 		_label.SetTextAutoSize(_mainMenuLoc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\GameOverScreen\NReturnToMainMenuButton.cs
+LineNumber : 56
+Line       : 		_label.SetTextAutoSize(new LocString("game_over_screen", "BUTTON.unlock").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\GameOverScreen\NRunSummary.cs
+LineNumber : 126
+Line       : 			_cardCount.SetTextAutoSize($"{player.DiscoveredCards.Count}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\GameOverScreen\NRunSummary.cs
+LineNumber : 131
+Line       : 			_relicCount.SetTextAutoSize($"{player.DiscoveredRelics.Count}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\GameOverScreen\NRunSummary.cs
+LineNumber : 136
+Line       : 			_potionCount.SetTextAutoSize($"{player.DiscoveredPotions.Count}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\GameOverScreen\NRunSummary.cs
+LineNumber : 141
+Line       : 			_enemyCount.SetTextAutoSize($"{player.DiscoveredEnemies.Count}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\GameOverScreen\NRunSummary.cs
+LineNumber : 146
+Line       : 			_epochCount.SetTextAutoSize($"{player.DiscoveredEpochs.Count}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\GameOverScreen\NScoreLine.cs
+LineNumber : 20
+Line       : 		nScoreLine.GetNode<MegaLabel>("%Label").SetTextAutoSize(label);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\GameOverScreen\NScoreLine.cs
+LineNumber : 21
+Line       : 		nScoreLine.GetNode<MegaLabel>("%Score").SetTextAutoSize(score);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\InspectScreens\NInspectRelicScreen.cs
+LineNumber : 209
+Line       : 			_nameLabel.SetTextAutoSize(new LocString("inspect_relic_screen", "LOCKED_TITLE").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\InspectScreens\NInspectRelicScreen.cs
+LineNumber : 210
+Line       : 			_rarityLabel.SetTextAutoSize(string.Empty);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\InspectScreens\NInspectRelicScreen.cs
+LineNumber : 212
+Line       : 			_description.SetTextAutoSize(new LocString("inspect_relic_screen", "LOCKED_DESCRIPTION").GetFormattedTe
+             xt());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\InspectScreens\NInspectRelicScreen.cs
+LineNumber : 219
+Line       : 			_nameLabel.SetTextAutoSize(new LocString("inspect_relic_screen", "UNDISCOVERED_TITLE").GetFormattedText
+             ());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\InspectScreens\NInspectRelicScreen.cs
+LineNumber : 220
+Line       : 			_rarityLabel.SetTextAutoSize(string.Empty);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\InspectScreens\NInspectRelicScreen.cs
+LineNumber : 222
+Line       : 			_description.SetTextAutoSize(new LocString("inspect_relic_screen", "UNDISCOVERED_DESCRIPTION").GetForma
+             ttedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\InspectScreens\NInspectRelicScreen.cs
+LineNumber : 229
+Line       : 			_nameLabel.SetTextAutoSize(relicModel.Title.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\InspectScreens\NInspectRelicScreen.cs
+LineNumber : 231
+Line       : 			_rarityLabel.SetTextAutoSize(locString.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\InspectScreens\NInspectRelicScreen.cs
+LineNumber : 233
+Line       : 			_description.SetTextAutoSize(relicModel.DynamicDescription.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\InspectScreens\NInspectRelicScreen.cs
+LineNumber : 234
+Line       : 			_flavor.SetTextAutoSize(relicModel.Flavor.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NCompendiumBottomButton.cs
+LineNumber : 71
+Line       : 		_label.SetTextAutoSize(locString.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NDisclaimerProceedButton.cs
+LineNumber : 20
+Line       : 		GetNode<MegaLabel>("%Label").SetTextAutoSize(locString.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NEarlyAccessDisclaimer.cs
+LineNumber : 30
+Line       : 		GetNode<MegaLabel>("%Header").SetTextAutoSize(formattedText);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NEarlyAccessDisclaimer.cs
+LineNumber : 46
+Line       : 		NModalContainer.Instance.Clear();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NEarlyAccessDisclaimer.cs
+LineNumber : 52
+Line       : 		GetNode<MegaRichTextLabel>("%Description").SetTextAutoSize(textAutoSize);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NJoinFriendRefreshButton.cs
+LineNumber : 33
+Line       : 		node.SetTextAutoSize(new LocString("main_menu_ui", "JOIN_FRIENDS_MENU.refresh").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NJoinFriendScreen.cs
+LineNumber : 83
+Line       : 		GetNode<MegaLabel>("TitleLabel").SetTextAutoSize(new LocString("main_menu_ui", "JOIN_FRIENDS_MENU.title"
+             ).GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NJoinFriendScreen.cs
+LineNumber : 84
+Line       : 		_noFriendsLabel.SetTextAutoSize(new LocString("main_menu_ui", "JOIN_FRIENDS_MENU.noFriends").GetFormatte
+             dText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NJoinFriendScreen.cs
+LineNumber : 253
+Line       : 					NModalContainer.Instance.Add(nErrorPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NJoinFriendScreen.cs
+LineNumber : 264
+Line       : 				NModalContainer.Instance.Add(nErrorPopup2);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NJoinFriendScreen.cs
+LineNumber : 278
+Line       : 				NModalContainer.Instance.Add(nErrorPopup3);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NMainMenu.cs
+LineNumber : 182
+Line       : 			NModalContainer.Instance.Add(NConfirmModLoadingPopup.Create());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NMainMenu.cs
+LineNumber : 192
+Line       : 			NModalContainer.Instance.Add(NEarlyAccessDisclaimer.Create());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NMainMenu.cs
+LineNumber : 412
+Line       : 		NModalContainer.Instance.Add(modalToCreate);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NMainMenu.cs
+LineNumber : 413
+Line       : 		NModalContainer.Instance.ShowBackstop();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NMainMenu.cs
+LineNumber : 419
+Line       : 		NModalContainer.Instance.Add(NAbandonRunConfirmPopup.Create(this));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NMainMenu.cs
+LineNumber : 537
+Line       : 		NModalContainer.Instance.Add(nGenericPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NMultiplayerHostSubmenu.cs
+LineNumber : 144
+Line       : 					NModalContainer.Instance.Add(nErrorPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NMultiplayerHostSubmenu.cs
+LineNumber : 153
+Line       : 				NModalContainer.Instance.Add(nErrorPopup2);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NMultiplayerSubmenu.cs
+LineNumber : 106
+Line       : 		NModalContainer.Instance.Add(nGenericPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NMultiplayerSubmenu.cs
+LineNumber : 148
+Line       : 			NModalContainer.Instance.Add(modalToCreate);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NMultiplayerSubmenu.cs
+LineNumber : 149
+Line       : 			NModalContainer.Instance.ShowBackstop();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NMultiplayerSubmenu.cs
+LineNumber : 228
+Line       : 					NModalContainer.Instance.Add(nErrorPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NMultiplayerSubmenu.cs
+LineNumber : 254
+Line       : 			NModalContainer.Instance.Add(modalToCreate);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NOpenProfileScreenButton.cs
+LineNumber : 70
+Line       : 		_title.SetTextAutoSize(_titleLoc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NOpenProfileScreenButton.cs
+LineNumber : 71
+Line       : 		_description.SetTextAutoSize(_descriptionLoc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NPatchNotesScreen.cs
+LineNumber : 178
+Line       : 		_patchText.SetTextAutoSize(textAutoSize);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NPatchNotesScreen.cs
+LineNumber : 207
+Line       : 			_dateLabel.SetTextAutoSize(formattedDate);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NShortSubmenuButton.cs
+LineNumber : 91
+Line       : 		_title.SetTextAutoSize(locString.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NSubmenuButton.cs
+LineNumber : 74
+Line       : 		_title.SetTextAutoSize(locString.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NSubmenuStack.cs
+LineNumber : 64
+Line       : 			HideBackstop();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NSubmenuStack.cs
+LineNumber : 70
+Line       : 	private void ShowBackstop()
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\MainMenu\NSubmenuStack.cs
+LineNumber : 75
+Line       : 	private void HideBackstop()
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Map\NMapLegendItem.cs
+LineNumber : 60
+Line       : 		GetNode<MegaLabel>("MegaLabel").SetTextAutoSize(new LocString("map", text + ".title").GetFormattedText()
+             );
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Map\NMapScreen.cs
+LineNumber : 178
+Line       : 		GetNode<MegaLabel>("MapLegend/Header").SetTextAutoSize(new LocString("map", "LEGEND_HEADER").GetFormatte
+             dText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Map\NMapScreen.cs
+LineNumber : 798
+Line       : 		NModalContainer.Instance.Add(nMapSelectFtue);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\ModdingScreen\NConfirmModLoadingPopup.cs
+LineNumber : 20
+Line       : 	private NVerticalPopup _verticalPopup;
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\ModdingScreen\NConfirmModLoadingPopup.cs
+LineNumber : 37
+Line       : 		_verticalPopup = GetNode<NVerticalPopup>("VerticalPopup");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\ModdingScreen\NConfirmModLoadingPopup.cs
+LineNumber : 38
+Line       : 		_verticalPopup.SetText(new LocString("main_menu_ui", "MODDING_POPUP.title"), new LocString("main_menu_ui
+             ", "MODDING_POPUP.description"));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\ModdingScreen\NConfirmModLoadingPopup.cs
+LineNumber : 39
+Line       : 		_verticalPopup.InitYesButton(new LocString("main_menu_ui", "MODDING_POPUP.load_mods"), OnYesButtonPresse
+             d);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\ModdingScreen\NConfirmModLoadingPopup.cs
+LineNumber : 40
+Line       : 		_verticalPopup.InitNoButton(new LocString("main_menu_ui", "MODDING_POPUP.cancel"), OnNoButtonPressed);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\ModdingScreen\NModdingScreen.cs
+LineNumber : 57
+Line       : 		node.GetNode<MegaLabel>("Visuals/Label").SetTextAutoSize(new LocString("settings_ui", "MODDING_SCREEN.GE
+             T_MODS_BUTTON").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\ModdingScreen\NModdingScreen.cs
+LineNumber : 58
+Line       : 		node2.GetNode<MegaLabel>("Visuals/Label").SetTextAutoSize(new LocString("settings_ui", "MODDING_SCREEN.M
+             AKE_MODS_BUTTON").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\ModdingScreen\NModdingScreen.cs
+LineNumber : 59
+Line       : 		GetNode<MegaRichTextLabel>("%InstalledModsTitle").SetTextAutoSize(new LocString("settings_ui", "MODDING_
+             SCREEN.INSTALLED_MODS_TITLE").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\ModdingScreen\NModdingScreen.cs
+LineNumber : 60
+Line       : 		GetNode<MegaRichTextLabel>("%PendingChangesLabel").SetTextAutoSize(new LocString("settings_ui", "MODDING
+             _SCREEN.PENDING_CHANGES_WARNING").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\ModdingScreen\NModdingScreen.cs
+LineNumber : 72
+Line       : 			NModalContainer.Instance.Add(NConfirmModLoadingPopup.Create());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\ModdingScreen\NModMenuButton.cs
+LineNumber : 34
+Line       : 		_label.SetTextAutoSize(locString.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Overlays\NOverlayStack.cs
+LineNumber : 61
+Line       : 			ShowBackstop();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Overlays\NOverlayStack.cs
+LineNumber : 76
+Line       : 			HideBackstop();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Overlays\NOverlayStack.cs
+LineNumber : 94
+Line       : 					HideBackstop();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Overlays\NOverlayStack.cs
+LineNumber : 100
+Line       : 				HideBackstop();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Overlays\NOverlayStack.cs
+LineNumber : 131
+Line       : 	public void ShowBackstop()
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Overlays\NOverlayStack.cs
+LineNumber : 143
+Line       : 	public void HideBackstop()
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\PauseMenu\NPauseMenu.cs
+LineNumber : 100
+Line       : 		_pausedLabel.SetTextAutoSize(_pausedLoc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\PauseMenu\NPauseMenu.cs
+LineNumber : 101
+Line       : 		_resumeButton.GetNode<MegaLabel>("Label").SetTextAutoSize(_resumeLoc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\PauseMenu\NPauseMenu.cs
+LineNumber : 102
+Line       : 		_settingsButton.GetNode<MegaLabel>("Label").SetTextAutoSize(_settingsLoc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\PauseMenu\NPauseMenu.cs
+LineNumber : 103
+Line       : 		_compendiumButton.GetNode<MegaLabel>("Label").SetTextAutoSize(_compendiumLoc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\PauseMenu\NPauseMenu.cs
+LineNumber : 104
+Line       : 		_giveUpButton.GetNode<MegaLabel>("Label").SetTextAutoSize(_giveUpLoc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\PauseMenu\NPauseMenu.cs
+LineNumber : 105
+Line       : 		_disconnectButton.GetNode<MegaLabel>("Label").SetTextAutoSize(_disconnectLoc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\PauseMenu\NPauseMenu.cs
+LineNumber : 106
+Line       : 		_saveAndQuitButton.GetNode<MegaLabel>("Label").SetTextAutoSize(_saveAndQuitLoc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\PauseMenu\NPauseMenu.cs
+LineNumber : 144
+Line       : 		NModalContainer.Instance.Add(NAbandonRunConfirmPopup.Create(null));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\PauseMenu\NPauseMenu.cs
+LineNumber : 151
+Line       : 			NModalContainer.Instance.Add(NDisconnectConfirmPopup.Create());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\ProfileScreen\NDeleteProfileButton.cs
+LineNumber : 40
+Line       : 		_label.SetTextAutoSize(_buttonMesssage.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\ProfileScreen\NDeleteProfileButton.cs
+LineNumber : 61
+Line       : 		NModalContainer.Instance.Add(nGenericPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\ProfileScreen\NProfileScreen.cs
+LineNumber : 53
+Line       : 		GetNode<MegaLabel>("%ChooseProfileMessage").SetTextAutoSize(new LocString("main_menu_ui", "PROFILE_SCREE
+             N.BUTTON.chooseProfileMessage").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\RunHistoryScreen\NActHistoryEntry.cs
+LineNumber : 34
+Line       : 		_actLabel.SetTextAutoSize(_actName.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\RunHistoryScreen\NDeckHistoryEntry.cs
+LineNumber : 65
+Line       : 		_titleLabel.SetTextAutoSize(Card.Title);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\RunHistoryScreen\NDeckHistoryEntry.cs
+LineNumber : 73
+Line       : 		_titleLabel.SetTextAutoSize(text);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\RunHistoryScreen\NRunHistory.cs
+LineNumber : 338
+Line       : 			_hpLabel.SetTextAutoSize($"{characterModel.StartingHp}/{characterModel.StartingHp}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\RunHistoryScreen\NRunHistory.cs
+LineNumber : 339
+Line       : 			_goldLabel.SetTextAutoSize($"{characterModel.StartingGold}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\RunHistoryScreen\NRunHistory.cs
+LineNumber : 345
+Line       : 			_hpLabel.SetTextAutoSize($"{playerMapPointHistoryEntry.CurrentHp}/{playerMapPointHistoryEntry.MaxHp}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\RunHistoryScreen\NRunHistory.cs
+LineNumber : 346
+Line       : 			_goldLabel.SetTextAutoSize($"{playerMapPointHistoryEntry.CurrentGold}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\RunHistoryScreen\NRunHistory.cs
+LineNumber : 372
+Line       : 		_floorLabel.SetTextAutoSize($"{value}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\RunHistoryScreen\NRunHistory.cs
+LineNumber : 581
+Line       : 		_timeLabel.SetTextAutoSize(TimeFormatting.Format(history.RunTime));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\RunHistoryScreen\NRunHistoryPlayerIcon.cs
+LineNumber : 65
+Line       : 		_ascensionLabel.SetTextAutoSize((history.Ascension > 0) ? history.Ascension.ToString() : string.Empty);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\ScreenContext\ActiveScreenContext.cs
+LineNumber : 34
+Line       : 		if (NModalContainer.Instance?.OpenModal != null)
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\ScreenContext\ActiveScreenContext.cs
+LineNumber : 36
+Line       : 			return NModalContainer.Instance.OpenModal;
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NAbandonRunButton.cs
+LineNumber : 21
+Line       : 		NModalContainer.Instance.Add(NAbandonRunConfirmPopup.Create(null));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NAspectRatioDropdown.cs
+LineNumber : 36
+Line       : 		_currentOptionLabel.SetTextAutoSize(GetAspectRatioSettingString(_currentAspectRatioSetting));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NAspectRatioDropdownItem.cs
+LineNumber : 19
+Line       : 			_label.SetTextAutoSize(new LocString("settings_ui", "ASPECT_RATIO_AUTO").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NAspectRatioDropdownItem.cs
+LineNumber : 22
+Line       : 			_label.SetTextAutoSize(new LocString("settings_ui", "ASPECT_RATIO_FOUR_BY_THREE").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NAspectRatioDropdownItem.cs
+LineNumber : 25
+Line       : 			_label.SetTextAutoSize(new LocString("settings_ui", "ASPECT_RATIO_SIXTEEN_BY_TEN").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NAspectRatioDropdownItem.cs
+LineNumber : 28
+Line       : 			_label.SetTextAutoSize(new LocString("settings_ui", "ASPECT_RATIO_SIXTEEN_BY_NINE").GetFormattedText())
+             ;
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NAspectRatioDropdownItem.cs
+LineNumber : 31
+Line       : 			_label.SetTextAutoSize(new LocString("settings_ui", "ASPECT_RATIO_TWENTY_ONE_BY_NINE").GetFormattedText
+             ());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NCreditsButton.cs
+LineNumber : 20
+Line       : 		_label.SetTextAutoSize(new LocString("settings_ui", "CREDITS_BUTTON_LABEL").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NCreditsButton.cs
+LineNumber : 29
+Line       : 			NModalContainer.Instance.Add(nCreditsScreen, showBackstop: false);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NDisplayDropdown.cs
+LineNumber : 51
+Line       : 			_currentOptionLabel.SetTextAutoSize(_optionString.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NDisplayDropdownItem.cs
+LineNumber : 14
+Line       : 		_label.SetTextAutoSize(textAutoSize);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NFpsPaginator.cs
+LineNumber : 31
+Line       : 		_label.SetTextAutoSize(_options[_currentIndex]);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NFpsPaginator.cs
+LineNumber : 37
+Line       : 		_label.SetTextAutoSize(_options[index]);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NLanguageButton.cs
+LineNumber : 40
+Line       : 		_label.SetTextAutoSize(new LocString("settings_ui", "LANGUAGE_" + languageIsoCode.ToUpperInvariant()).Ge
+             tRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NLanguageDropdown.cs
+LineNumber : 56
+Line       : 		_currentOptionLabel.SetTextAutoSize(GetLanguageNameForCode(CurrentLanguage));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NLanguageDropdown.cs
+LineNumber : 78
+Line       : 			_currentOptionLabel.SetTextAutoSize(GetLanguageNameForCode(nLanguageDropdownItem.LanguageCode));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NLanguageDropdownItem.cs
+LineNumber : 24
+Line       : 		_richLabel.SetTextAutoSize(text);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NMsaaPaginator.cs
+LineNumber : 24
+Line       : 		_label.SetTextAutoSize(GetMsaaLabel(int.Parse(_options[_currentIndex])));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NMsaaPaginator.cs
+LineNumber : 30
+Line       : 		_label.SetTextAutoSize(GetMsaaLabel(int.Parse(_options[index])));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NOpenFeedbackScreenButton.cs
+LineNumber : 18
+Line       : 		_label.SetTextAutoSize(new LocString("settings_ui", "SEND_FEEDBACK_BUTTON_LABEL").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NOpenModdingScreenButton.cs
+LineNumber : 19
+Line       : 		_label.SetTextAutoSize(new LocString("settings_ui", "MODDING_SCREEN_BUTTON_LABEL").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NPaginator.cs
+LineNumber : 96
+Line       : 		_vfxLabel.SetTextAutoSize(_label.Text);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NResetGameplayButton.cs
+LineNumber : 21
+Line       : 		GetNode<MegaLabel>("Label").SetTextAutoSize(new LocString("settings_ui", "RESET_SETTINGS_BUTTON").GetFor
+             mattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NResetGameplayButton.cs
+LineNumber : 27
+Line       : 		NModalContainer.Instance.Add(nGenericPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NResetGraphicsButton.cs
+LineNumber : 21
+Line       : 		GetNode<MegaLabel>("Label").SetTextAutoSize(new LocString("settings_ui", "RESET_SETTINGS_BUTTON").GetFor
+             mattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NResetGraphicsButton.cs
+LineNumber : 27
+Line       : 		NModalContainer.Instance.Add(nGenericPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NResetToDefaultControlsButton.cs
+LineNumber : 18
+Line       : 		_label.SetTextAutoSize(new LocString("settings_ui", "INPUT_SETTINGS.RESET_TO_DEFAULT").GetFormattedText(
+             ));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NResetTutorialsButton.cs
+LineNumber : 29
+Line       : 		_label.SetTextAutoSize(new LocString("settings_ui", "TUTORIAL_RESET_BUTTON_LABEL").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NResetTutorialsButton.cs
+LineNumber : 35
+Line       : 		NModalContainer.Instance.Add(NSettingsScreenPopup.Create(_header, _description));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NResolutionDropdown.cs
+LineNumber : 44
+Line       : 			_currentOptionLabel.SetTextAutoSize($"{_currentResolution.X} x {_currentResolution.Y}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NResolutionDropdown.cs
+LineNumber : 92
+Line       : 		_currentOptionLabel.SetTextAutoSize("N/A");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NResolutionDropdownItem.cs
+LineNumber : 14
+Line       : 		_label.SetTextAutoSize(textAutoSize);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NScreenshakePaginator.cs
+LineNumber : 27
+Line       : 			_label.SetTextAutoSize(">:P");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NScreenshakePaginator.cs
+LineNumber : 31
+Line       : 			_label.SetTextAutoSize(_options[_currentIndex]);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NScreenshakePaginator.cs
+LineNumber : 43
+Line       : 		_label.SetTextAutoSize(_options[index]);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NSettingsSlider.cs
+LineNumber : 36
+Line       : 		_valueLabel.SetTextAutoSize($"{_slider.Value}%");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NSettingsSlider.cs
+LineNumber : 56
+Line       : 		_valueLabel.SetTextAutoSize($"{value}%");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NSettingsTab.cs
+LineNumber : 106
+Line       : 		_label.SetTextAutoSize(text);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NSettingsToast.cs
+LineNumber : 24
+Line       : 		_label.SetTextAutoSize(locString.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NVSyncPaginator.cs
+LineNumber : 32
+Line       : 		_label.SetTextAutoSize(_options[_currentIndex]);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Settings\NVSyncPaginator.cs
+LineNumber : 54
+Line       : 		_label.SetTextAutoSize(_options[index]);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Shops\NMerchantCard.cs
+LineNumber : 72
+Line       : 		_costLabel.SetTextAutoSize(_cardEntry.Cost.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Shops\NMerchantCardRemoval.cs
+LineNumber : 74
+Line       : 				_costLabel.SetTextAutoSize(_removalEntry.Cost.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Shops\NMerchantPotion.cs
+LineNumber : 71
+Line       : 		_costLabel.SetTextAutoSize(_potionEntry.Cost.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Shops\NMerchantRelic.cs
+LineNumber : 84
+Line       : 		_costLabel.SetTextAutoSize(_relicEntry.Cost.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Shops\NMerchantSlot.cs
+LineNumber : 213
+Line       : 			_costLabel.SetTextAutoSize(Entry.Cost.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\StatsScreen\NAchievementHolder.cs
+LineNumber : 129
+Line       : 			_date.SetTextAutoSize(locString.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\StatsScreen\NCharacterStats.cs
+LineNumber : 57
+Line       : 		_nameLabel.SetTextAutoSize(byId.Title.GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\StatsScreen\NStatEntry.cs
+LineNumber : 41
+Line       : 		_topLabel.SetTextAutoSize(text);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\StatsScreen\NStatEntry.cs
+LineNumber : 47
+Line       : 		_bottomLabel.SetTextAutoSize(text);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\StatsScreen\NStatsScreen.cs
+LineNumber : 70
+Line       : 		GetNode<MegaLabel>("%OverallStatsHeader").SetTextAutoSize(new LocString("main_menu_ui", "STATISTICS.OVER
+             ALL.title").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\StatsScreen\NStatsScreen.cs
+LineNumber : 71
+Line       : 		GetNode<MegaLabel>("%CharacterStatsHeader").SetTextAutoSize(new LocString("main_menu_ui", "STATISTICS.ti
+             tle").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\NAcknowledgeButton.cs
+LineNumber : 23
+Line       : 		_label.SetTextAutoSize(new LocString("timeline", "ACKNOWLEDGE_BUTTON").GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\NEpochInspectScreen.cs
+LineNumber : 147
+Line       : 			_storyLabel.SetTextAutoSize(epoch.StoryTitle ?? string.Empty);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\NEpochInspectScreen.cs
+LineNumber : 150
+Line       : 			_chapterLabel.SetTextAutoSize(_chapterLoc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\NEpochInspectScreen.cs
+LineNumber : 155
+Line       : 			_storyLabel.SetTextAutoSize(string.Empty);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\NEpochInspectScreen.cs
+LineNumber : 156
+Line       : 			_chapterLabel.SetTextAutoSize(epoch.Title.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\NEpochInspectScreen.cs
+LineNumber : 167
+Line       : 		NTimelineScreen.Instance.ShowBackstopAndHideUi();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\NEpochInspectScreen.cs
+LineNumber : 196
+Line       : 		_closeLabel.SetTextAutoSize(new LocString("timeline", "EPOCH_INSPECT.closeButton").GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\NEpochInspectScreen.cs
+LineNumber : 231
+Line       : 			_storyLabel.SetTextAutoSize(epoch.StoryTitle ?? string.Empty);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\NEpochInspectScreen.cs
+LineNumber : 234
+Line       : 			_chapterLabel.SetTextAutoSize(_chapterLoc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\NEpochInspectScreen.cs
+LineNumber : 241
+Line       : 			_storyLabel.SetTextAutoSize(string.Empty);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\NEpochInspectScreen.cs
+LineNumber : 242
+Line       : 			_chapterLabel.SetTextAutoSize(epoch.Title.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\NEpochInspectScreen.cs
+LineNumber : 248
+Line       : 		NTimelineScreen.Instance.ShowBackstopAndHideUi();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\NEpochInspectScreen.cs
+LineNumber : 269
+Line       : 			NTimelineScreen.Instance.HideBackstopAndShowUi(showBackButton: true);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\NEpochInspectScreen.cs
+LineNumber : 299
+Line       : 		_closeLabel.SetTextAutoSize(new LocString("timeline", "EPOCH_INSPECT.continueButton").GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\NEraColumn.cs
+LineNumber : 66
+Line       : 		_name.SetTextAutoSize(new LocString("eras", eraIcon.Item2 + ".name").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\NEraColumn.cs
+LineNumber : 67
+Line       : 		_year.SetTextAutoSize(new LocString("eras", eraIcon.Item2 + ".year").GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\NTimelineScreen.cs
+LineNumber : 484
+Line       : 	public void ShowBackstopAndHideUi()
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\NTimelineScreen.cs
+LineNumber : 495
+Line       : 	public async Task HideBackstopAndShowUi(bool showBackButton)
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\NUnlockConfirmButton.cs
+LineNumber : 24
+Line       : 		GetNode<MegaLabel>("Label").SetTextAutoSize(new LocString("timeline", "UNLOCK_CONFIRM").GetFormattedText
+             ());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\UnlockScreens\NUnlockCardsScreen.cs
+LineNumber : 57
+Line       : 		_banner.label.SetTextAutoSize(new LocString("timeline", "UNLOCK_CARDS_BANNER").GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\UnlockScreens\NUnlockPotionsScreen.cs
+LineNumber : 54
+Line       : 		_banner.label.SetTextAutoSize(new LocString("timeline", "UNLOCK_POTIONS_BANNER").GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\UnlockScreens\NUnlockRelicsScreen.cs
+LineNumber : 54
+Line       : 		_banner.label.SetTextAutoSize(new LocString("timeline", "UNLOCK_RELICS_BANNER").GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\UnlockScreens\NUnlockScreen.cs
+LineNumber : 67
+Line       : 			await NTimelineScreen.Instance.HideBackstopAndShowUi(showBackButton: true);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\Timeline\UnlockScreens\NUnlockTimelineScreen.cs
+LineNumber : 41
+Line       : 		await NTimelineScreen.Instance.HideBackstopAndShowUi(showBackButton: false);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\TreasureRoomRelic\NHandImage.cs
+LineNumber : 145
+Line       : 		SetTextureToFightMove(RelicPickingFightMove.Rock);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\TreasureRoomRelic\NHandImage.cs
+LineNumber : 161
+Line       : 			SetTextureToFightMove(move);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\TreasureRoomRelic\NHandImage.cs
+LineNumber : 166
+Line       : 	private void SetTextureToFightMove(RelicPickingFightMove move)
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\TreasureRoomRelic\NHandImage.cs
+LineNumber : 238
+Line       : 		SetTextureToFightMove(RelicPickingFightMove.Paper);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\TreasureRoomRelic\NHandImage.cs
+LineNumber : 242
+Line       : 		SetTextureToFightMove(RelicPickingFightMove.Rock);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Screens\TreasureRoomRelic\NHandImage.cs
+LineNumber : 254
+Line       : 		SetTextureToFightMove(RelicPickingFightMove.Rock);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\TopBar\NRunTimer.cs
+LineNumber : 62
+Line       : 			_timerLabel.SetTextAutoSize(TimeFormatting.Format(RunManager.Instance.RunTime));
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\TopBar\NTopBarDeckButton.cs
+LineNumber : 76
+Line       : 		_countLabel.SetTextAutoSize(count.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\TopBar\NTopBarFloorIcon.cs
+LineNumber : 45
+Line       : 			_floorNumLabel.SetTextAutoSize(_runState.TotalFloor.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\TopBar\NTopBarGold.cs
+LineNumber : 56
+Line       : 		_goldLabel.SetTextAutoSize($"{_currentGold}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\TopBar\NTopBarGold.cs
+LineNumber : 74
+Line       : 		_goldPopupLabel.SetTextAutoSize(((_additionalGold > 0) ? "+" : "") + _additionalGold);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\TopBar\NTopBarGold.cs
+LineNumber : 103
+Line       : 				_goldPopupLabel.SetTextAutoSize(((_additionalGold >= 0) ? "+" : "") + _additionalGold);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\TopBar\NTopBarGold.cs
+LineNumber : 104
+Line       : 				_goldLabel.SetTextAutoSize($"{_player.Gold - _additionalGold}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\TopBar\NTopBarGold.cs
+LineNumber : 111
+Line       : 			_goldLabel.SetTextAutoSize($"{_player.Gold}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\TopBar\NTopBarHp.cs
+LineNumber : 53
+Line       : 			_hpLabel.SetTextAutoSize($"{currentHp}/{maxHp}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\TopBar\NTopBarHp.cs
+LineNumber : 72
+Line       : 			_hpLabel.SetTextAutoSize($"0/{_player.Creature.MaxHp}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\TopBar\NTopBarHp.cs
+LineNumber : 86
+Line       : 			_hpLabel.SetTextAutoSize($"{value}/{maxHp}");
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Vfx\NCardEnchantVfx.cs
+LineNumber : 64
+Line       : 		_enchantmentLabel.SetTextAutoSize(_cardModel.Enchantment.DisplayAmount.ToString());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Vfx\NDamageBlockedVfx.cs
+LineNumber : 48
+Line       : 		_label.SetTextAutoSize(_blockedLoc.GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Vfx\NDamageNumVfx.cs
+LineNumber : 80
+Line       : 		node.SetTextAutoSize(_text);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Vfx\NFullscreenTextVfx.cs
+LineNumber : 21
+Line       : 		nFullscreenTextVfx.GetNode<MegaLabel>("Label").SetTextAutoSize(text);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Vfx\NGainEpochVfx.cs
+LineNumber : 41
+Line       : 		_label.SetTextAutoSize(new LocString("vfx", "EPOCH_GAIN").GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Vfx\NHealNumVfx.cs
+LineNumber : 48
+Line       : 		node.SetTextAutoSize(_text);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Vfx\NPowerAppliedVfx.cs
+LineNumber : 80
+Line       : 		_powerField.SetTextAutoSize(_power.Title.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Vfx\NPowerRemovedVfx.cs
+LineNumber : 55
+Line       : 		GetNode<MegaLabel>("%WearsOff").SetTextAutoSize(_wearsOffLoc.GetRawText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Vfx\NPowerRemovedVfx.cs
+LineNumber : 56
+Line       : 		_powerField.SetTextAutoSize(_power.Title.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Vfx\NStunnedVfx.cs
+LineNumber : 49
+Line       : 		_label.SetTextAutoSize(_stunnedLoc.GetFormattedText());
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Nodes\Vfx\NThoughtBubbleVfx.cs
+LineNumber : 185
+Line       : 	public void SetTexture(Texture2D texture)
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Platform\Steam\SteamJoinCallbackHandler.cs
+LineNumber : 68
+Line       : 			NModalContainer.Instance.Add(nGenericPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Runs\RunManager.cs
+LineNumber : 1149
+Line       : 				NModalContainer.Instance.Add(nErrorPopup);
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Runs\RunManager.cs
+LineNumber : 1199
+Line       : 			NModalContainer.Instance?.Clear();
+
+Path       : E:\slay_spire_mods\slay_the_spire2\src\Core\Runs\RunManager.cs
+LineNumber : 1379
+Line       : 				NModalContainer.Instance.Add(nErrorPopup);
+
+
+

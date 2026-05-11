@@ -1,8 +1,8 @@
 {
   "KAOYAN_LEXICON.title": "考研词典",
-  "KAOYAN_LEXICON.description": "一本记录考研英语词汇的词典。当前版本暂未实现战斗效果。",
+  "KAOYAN_LEXICON.description": "一本记录考研英语词汇的词典。选择挑战以换取额外抽牌和答题奖励；选择不挑战，本场战斗获得1点力量和1点敏捷。",
   "KAOYAN_LEXICON.flavor": "每一页都写着某个清晨背过又忘过的单词。",
   "KaoyanLexicon.title": "考研词典",
-  "KaoyanLexicon.description": "一本记录考研英语词汇的词典。当前版本暂未实现战斗效果。",
+  "KaoyanLexicon.description": "一本记录考研英语词汇的词典。选择挑战以换取额外抽牌和答题奖励；选择不挑战，本场战斗获得1点力量和1点敏捷。",
   "KaoyanLexicon.flavor": "每一页都写着某个清晨背过又忘过的单词。"
 }

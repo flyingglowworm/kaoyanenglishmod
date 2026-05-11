@@ -17,10 +17,5 @@
       <HintPath>deps\0Harmony.dll</HintPath>
       <Private>false</Private>
     </Reference>
-
-    <Reference Include="GodotSharp">
-      <HintPath>deps\GodotSharp.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
   </ItemGroup>
 </Project>

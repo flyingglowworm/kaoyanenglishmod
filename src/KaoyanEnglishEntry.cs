@@ -18,7 +18,7 @@ public static class KaoyanEnglishEntry
     {
         Log.Warn($"{ModId} loaded.");
 
-        ModHelper.AddModelToPool(typeof(IroncladRelicPool), typeof(KaoyanLexicon));
+        ModHelper.AddModelToPool(typeof(SharedRelicPool), typeof(KaoyanLexicon));
 
         _harmony = new Harmony(HarmonyId);
         _harmony.PatchAll();

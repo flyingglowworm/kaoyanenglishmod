@@ -1,6 +1,6 @@
 [gd_resource type="AtlasTexture" load_steps=2 format=3]
 
-[ext_resource type="Texture2D" path="res://KaoyanEnglishMod/images/relics/kaoyan_lexicon.svg" id="1_kaoyan"]
+[ext_resource type="Texture2D" path="res://KaoyanEnglishMod/images/packed/relics/kaoyan_lexicon.png" id="1_kaoyan"]
 
 [resource]
 atlas = ExtResource("1_kaoyan")
