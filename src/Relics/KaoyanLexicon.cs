@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using KaoyanEnglishMod.UI;
 using KaoyanEnglishMod.Vocab;
@@ -7,11 +8,15 @@ using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Nodes.CommonUi;
+using MegaCrit.Sts2.Core.Rooms;
 
 namespace KaoyanEnglishMod.Relics;
 
@@ -24,12 +29,24 @@ public sealed class KaoyanLexicon : RelicModel
         Declined,
     }
 
+    private static readonly MethodInfo? WaitUntilQueueIsSafeMethod = typeof(CombatManager).GetMethod(
+        "WaitUntilQueueIsEmptyOrWaitingOnNonPlayerDrivenAction",
+        BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+
     private CombatState? _currentCombatState;
     private KaoyanChallengeMode _challengeMode = KaoyanChallengeMode.Undecided;
     private int _lastQuestionRound = -1;
     private int _lastExtraDrawRound = -1;
     private int _lastAnsweredRound = -1;
+    private int _pendingQuestionRound = -1;
+    private int _pendingQuestionTaskRound = -1;
+    private int _lastRewardChoiceRound = -1;
+    private int _lastRewardAppliedRound = -1;
     private bool _declinedRewardApplied;
+    private bool _challengePromptInProgress;
+    private bool _questionInProgress;
+    private bool _rewardChoiceInProgress;
+    private bool _handChoiceInProgress;
     private KaoyanVocabService? _vocabService;
     private bool _vocabLoaded;
 
@@ -51,41 +68,64 @@ public sealed class KaoyanLexicon : RelicModel
             return;
         }
 
-        if (!ReferenceEquals(_currentCombatState, combatState))
+        EnsureCombatState(combatState);
+        await Task.CompletedTask;
+    }
+
+    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+    {
+        if (!ReferenceEquals(player, Owner))
         {
-            _currentCombatState = combatState;
-            _challengeMode = KaoyanChallengeMode.Undecided;
-            _lastQuestionRound = -1;
-            _lastExtraDrawRound = -1;
-            _lastAnsweredRound = -1;
-            _declinedRewardApplied = false;
-            _vocabLoaded = false;
-            Log.Warn("[KaoyanEnglishMod] New combat challenge state initialized.");
+            return;
+        }
+
+        var combatState = player.Creature.CombatState;
+        if (combatState == null)
+        {
+            return;
+        }
+
+        EnsureCombatState(combatState);
+
+        if (!IsKaoyanCombatStillActive(combatState))
+        {
+            CancelPendingKaoyanFlow();
+            return;
         }
 
         if (combatState.RoundNumber == 1 && _challengeMode == KaoyanChallengeMode.Undecided)
         {
-            try
-            {
-                Flash();
-                KaoyanChallengePopup.ShowChallenge(choice => HandleChallengeChoice(choice, combatState));
-            }
-            catch (Exception exception)
-            {
-                Log.Error("[KaoyanEnglishMod] Failed to show challenge popup.");
-                Log.Error(exception.ToString());
-            }
-
+            ScheduleChallengePrompt(combatState.RoundNumber, combatState);
             return;
         }
 
-        if (_challengeMode != KaoyanChallengeMode.Challenge
-            || (_lastQuestionRound == combatState.RoundNumber && _lastExtraDrawRound == combatState.RoundNumber))
+        if (_challengeMode == KaoyanChallengeMode.Challenge)
         {
+            ScheduleChallengeQuestion(combatState.RoundNumber, combatState);
+        }
+
+        await Task.CompletedTask;
+    }
+
+    public override async Task AfterCombatVictory(CombatRoom room)
+    {
+        CancelPendingKaoyanFlow();
+        await Task.CompletedTask;
+    }
+
+    public override async Task AfterDeath(
+        PlayerChoiceContext choiceContext,
+        Creature creature,
+        bool wasRemovalPrevented,
+        float deathAnimLength)
+    {
+        if (_currentCombatState == null || !IsKaoyanCombatStillActive(_currentCombatState))
+        {
+            CancelPendingKaoyanFlow();
             return;
         }
 
-        await HandleChallengeRoundStartSafelyAsync(combatState.RoundNumber, combatState);
+        await Task.CompletedTask;
     }
 
     private void HandleChallengeChoice(bool isChallengeSelected, CombatState combatState)
@@ -97,44 +137,202 @@ public sealed class KaoyanLexicon : RelicModel
 
         if (!isChallengeSelected)
         {
+            _challengePromptInProgress = false;
             _challengeMode = KaoyanChallengeMode.Declined;
             Log.Warn("[KaoyanEnglishMod] Challenge declined.");
             _ = ApplyDeclinedRewardSafelyAsync(combatState);
             return;
         }
 
+        _challengePromptInProgress = false;
         _challengeMode = KaoyanChallengeMode.Challenge;
         Log.Warn("[KaoyanEnglishMod] Challenge selected.");
-        _ = HandleChallengeRoundStartSafelyAsync(combatState.RoundNumber, combatState);
+        ScheduleChallengeQuestion(combatState.RoundNumber, combatState);
     }
 
-    private async Task HandleChallengeRoundStartSafelyAsync(int roundNumber, CombatState combatState)
+    private void EnsureCombatState(CombatState combatState)
+    {
+        if (ReferenceEquals(_currentCombatState, combatState))
+        {
+            return;
+        }
+
+        _currentCombatState = combatState;
+        _challengeMode = KaoyanChallengeMode.Undecided;
+        ResetPerCombatFlowState();
+        _declinedRewardApplied = false;
+        _vocabLoaded = false;
+        Log.Warn("[KaoyanEnglishMod] New combat challenge state initialized.");
+    }
+
+    private void ResetPerCombatFlowState()
+    {
+        _lastQuestionRound = -1;
+        _lastExtraDrawRound = -1;
+        _lastAnsweredRound = -1;
+        _pendingQuestionRound = -1;
+        _pendingQuestionTaskRound = -1;
+        _lastRewardChoiceRound = -1;
+        _lastRewardAppliedRound = -1;
+        _challengePromptInProgress = false;
+        _questionInProgress = false;
+        _rewardChoiceInProgress = false;
+        _handChoiceInProgress = false;
+    }
+
+    private void CancelPendingKaoyanFlow()
+    {
+        _pendingQuestionRound = -1;
+        _pendingQuestionTaskRound = -1;
+        _challengePromptInProgress = false;
+        _questionInProgress = false;
+        _rewardChoiceInProgress = false;
+        _handChoiceInProgress = false;
+    }
+
+    private void ScheduleChallengePrompt(int roundNumber, CombatState combatState)
+    {
+        if (_challengePromptInProgress)
+        {
+            return;
+        }
+
+        _challengePromptInProgress = true;
+        _ = ShowChallengePromptWhenSafeAsync(roundNumber, combatState);
+    }
+
+    private async Task ShowChallengePromptWhenSafeAsync(int roundNumber, CombatState combatState)
     {
         try
         {
-            Flash();
+            while (ReferenceEquals(_currentCombatState, combatState)
+                && _challengeMode == KaoyanChallengeMode.Undecided
+                && _challengePromptInProgress)
+            {
+                await WaitForCombatQueueToSettleAsync();
+
+                if (!IsKaoyanCombatStillActive(combatState))
+                {
+                    CancelPendingKaoyanFlow();
+                    return;
+                }
+
+                if (CanStartKaoyanQuestionNow(combatState, roundNumber, allowChallengePrompt: true))
+                {
+                    Flash();
+                    KaoyanChallengePopup.ShowChallenge(choice => HandleChallengeChoice(choice, combatState));
+                    return;
+                }
+
+                await DelayBeforeNextSafetyProbeAsync();
+            }
         }
         catch (Exception exception)
         {
-            Log.Error("[KaoyanEnglishMod] Failed to flash challenge relic.");
+            _challengePromptInProgress = false;
+            Log.Error("[KaoyanEnglishMod] Failed to show challenge popup.");
             Log.Error(exception.ToString());
         }
-
-        await DrawExtraCardForChallengeSafelyAsync(roundNumber);
-        GenerateLogAndShowQuestionSafely(roundNumber, combatState);
     }
 
-    private async Task DrawExtraCardForChallengeSafelyAsync(int roundNumber)
+    private void ScheduleChallengeQuestion(int roundNumber, CombatState combatState)
+    {
+        if (_lastQuestionRound == roundNumber
+            || _pendingQuestionRound == roundNumber
+            || _pendingQuestionTaskRound == roundNumber)
+        {
+            return;
+        }
+
+        _pendingQuestionRound = roundNumber;
+        _pendingQuestionTaskRound = roundNumber;
+        _ = ProcessPendingQuestionWhenSafeAsync(roundNumber, combatState);
+    }
+
+    private async Task ProcessPendingQuestionWhenSafeAsync(int roundNumber, CombatState combatState)
+    {
+        try
+        {
+            while (ReferenceEquals(_currentCombatState, combatState)
+                && _pendingQuestionRound == roundNumber
+                && _challengeMode == KaoyanChallengeMode.Challenge)
+            {
+                await WaitForCombatQueueToSettleAsync();
+
+                if (!IsKaoyanCombatStillActive(combatState))
+                {
+                    CancelPendingKaoyanFlow();
+                    return;
+                }
+
+                if (!CanStartKaoyanQuestionNow(combatState, roundNumber))
+                {
+                    await DelayBeforeNextSafetyProbeAsync();
+                    continue;
+                }
+
+                await DrawExtraCardForChallengeSafelyAsync(roundNumber, combatState);
+
+                await WaitForCombatQueueToSettleAsync();
+                if (!CanStartKaoyanQuestionNow(combatState, roundNumber))
+                {
+                    await DelayBeforeNextSafetyProbeAsync();
+                    continue;
+                }
+
+                GenerateLogAndShowQuestionSafely(roundNumber, combatState);
+                return;
+            }
+        }
+        catch (Exception exception)
+        {
+            Log.Error("[KaoyanEnglishMod] Failed while waiting for a safe question window.");
+            Log.Error(exception.ToString());
+        }
+        finally
+        {
+            if (_pendingQuestionTaskRound == roundNumber)
+            {
+                _pendingQuestionTaskRound = -1;
+            }
+        }
+    }
+
+    private async Task WaitForCombatQueueToSettleAsync()
+    {
+        var combatManager = CombatManager.Instance;
+        if (combatManager == null)
+        {
+            return;
+        }
+
+        if (WaitUntilQueueIsSafeMethod?.Invoke(combatManager, null) is Task waitTask)
+        {
+            await waitTask;
+        }
+    }
+
+    private static async Task DelayBeforeNextSafetyProbeAsync()
+    {
+        await Task.Delay(100);
+    }
+
+    private async Task DrawExtraCardForChallengeSafelyAsync(int roundNumber, CombatState combatState)
     {
         if (_lastExtraDrawRound == roundNumber)
         {
             return;
         }
 
-        _lastExtraDrawRound = roundNumber;
+        if (!IsKaoyanCombatStillActive(combatState))
+        {
+            CancelPendingKaoyanFlow();
+            return;
+        }
 
         try
         {
+            _lastExtraDrawRound = roundNumber;
             Log.Warn($"[KaoyanEnglishMod] Drawing 1 extra card for challenge mode. Round {roundNumber}.");
             await CardPileCmd.Draw(new BlockingPlayerChoiceContext(), 1m, Owner);
         }
@@ -147,7 +345,9 @@ public sealed class KaoyanLexicon : RelicModel
 
     private async Task ApplyDeclinedRewardSafelyAsync(CombatState combatState)
     {
-        if (!ReferenceEquals(_currentCombatState, combatState) || _declinedRewardApplied)
+        if (!ReferenceEquals(_currentCombatState, combatState)
+            || _declinedRewardApplied
+            || !IsKaoyanCombatStillActive(combatState))
         {
             return;
         }
@@ -176,8 +376,15 @@ public sealed class KaoyanLexicon : RelicModel
             return;
         }
 
+        if (!CanStartKaoyanQuestionNow(combatState, roundNumber))
+        {
+            return;
+        }
+
         try
         {
+            _pendingQuestionRound = -1;
+            _questionInProgress = true;
             var question = GenerateAndLogQuestion(roundNumber);
             var popupShown = KaoyanQuestionPopup.ShowQuestion(question, answerIndex =>
             {
@@ -186,11 +393,13 @@ public sealed class KaoyanLexicon : RelicModel
 
             if (!popupShown)
             {
+                _questionInProgress = false;
                 Log.Warn("[KaoyanEnglishMod] Failed to show question popup; question was logged only.");
             }
         }
         catch (Exception exception)
         {
+            _questionInProgress = false;
             Log.Error("[KaoyanEnglishMod] Failed to create round question.");
             Log.Error(exception.ToString());
         }
@@ -227,18 +436,25 @@ public sealed class KaoyanLexicon : RelicModel
             return;
         }
 
+        if (!IsKaoyanCombatStillActive(combatState))
+        {
+            CancelPendingKaoyanFlow();
+            return;
+        }
+
         _lastAnsweredRound = roundNumber;
 
         if (answerIndex == null)
         {
             Log.Warn($"[KaoyanEnglishMod] Question skipped. Round {roundNumber}.");
+            CompleteKaoyanQuestionFlow();
             return;
         }
 
         if (answerIndex.Value == question.CorrectIndex)
         {
             Log.Warn($"[KaoyanEnglishMod] Correct answer selected. Round {roundNumber}.");
-            ShowRewardChoiceSafely(roundNumber);
+            ShowRewardChoiceSafely(roundNumber, combatState);
             return;
         }
 
@@ -247,58 +463,92 @@ public sealed class KaoyanLexicon : RelicModel
         _ = ApplyWrongAnswerPenaltySafelyAsync(roundNumber, combatState);
     }
 
-    private void ShowRewardChoiceSafely(int roundNumber)
+    private void ShowRewardChoiceSafely(int roundNumber, CombatState combatState)
     {
+        if (!IsKaoyanCombatStillActive(combatState) || _lastRewardChoiceRound == roundNumber)
+        {
+            CancelPendingKaoyanFlow();
+            return;
+        }
+
         try
         {
+            _rewardChoiceInProgress = true;
             Log.Warn($"[KaoyanEnglishMod] Showing reward choice. Round {roundNumber}.");
             var popupShown = KaoyanRewardChoicePopup.ShowRewardChoice(choice =>
             {
-                HandleRewardChoice(roundNumber, choice);
+                HandleRewardChoice(roundNumber, choice, combatState);
             });
 
             if (!popupShown)
             {
+                _rewardChoiceInProgress = false;
+                CompleteKaoyanQuestionFlow();
                 Log.Warn("[KaoyanEnglishMod] Failed to show reward choice popup; reward skipped in 4H.");
             }
         }
         catch (Exception exception)
         {
+            _rewardChoiceInProgress = false;
+            CompleteKaoyanQuestionFlow();
             Log.Error("[KaoyanEnglishMod] Failed to show reward choice popup.");
             Log.Error(exception.ToString());
         }
     }
 
-    private void HandleRewardChoice(int roundNumber, KaoyanRewardChoice choice)
+    private void HandleRewardChoice(int roundNumber, KaoyanRewardChoice choice, CombatState combatState)
     {
+        if (_lastRewardChoiceRound == roundNumber)
+        {
+            return;
+        }
+
+        _lastRewardChoiceRound = roundNumber;
+        _rewardChoiceInProgress = false;
+
+        if (!IsKaoyanCombatStillActive(combatState))
+        {
+            CancelPendingKaoyanFlow();
+            return;
+        }
+
         switch (choice)
         {
             case KaoyanRewardChoice.Replay:
                 Log.Warn($"[KaoyanEnglishMod] Reward selected: Replay. Round {roundNumber}.");
-                _ = SelectHandCardForRewardSafelyAsync(roundNumber, choice);
+                _ = SelectHandCardForRewardSafelyAsync(roundNumber, choice, combatState);
                 break;
             case KaoyanRewardChoice.FreeThisTurn:
                 Log.Warn($"[KaoyanEnglishMod] Reward selected: FreeThisTurn. Round {roundNumber}.");
-                _ = SelectHandCardForRewardSafelyAsync(roundNumber, choice);
+                _ = SelectHandCardForRewardSafelyAsync(roundNumber, choice, combatState);
                 break;
             default:
                 Log.Warn($"[KaoyanEnglishMod] Unknown reward selected: {choice}. Round {roundNumber}.");
+                CompleteKaoyanQuestionFlow();
                 break;
         }
     }
 
-    private async Task SelectHandCardForRewardSafelyAsync(int roundNumber, KaoyanRewardChoice choice)
+    private async Task SelectHandCardForRewardSafelyAsync(int roundNumber, KaoyanRewardChoice choice, CombatState combatState)
     {
         var rewardName = GetRewardLogName(choice);
+        _handChoiceInProgress = true;
 
         try
         {
+            if (!IsKaoyanCombatStillActive(combatState))
+            {
+                CancelPendingKaoyanFlow();
+                return;
+            }
+
             Log.Warn($"[KaoyanEnglishMod] Selecting a hand card for {rewardName} reward. Round {roundNumber}.");
 
             var handCards = PileType.Hand.GetPile(Owner).Cards.ToList();
             if (handCards.Count == 0)
             {
                 Log.Warn($"[KaoyanEnglishMod] {rewardName} reward skipped: hand is empty.");
+                CompleteKaoyanQuestionFlow();
                 return;
             }
 
@@ -312,27 +562,49 @@ public sealed class KaoyanLexicon : RelicModel
             if (selectedCard == null)
             {
                 Log.Warn($"[KaoyanEnglishMod] {rewardName} reward skipped: no hand card selected.");
+                CompleteKaoyanQuestionFlow();
                 return;
             }
 
-            ApplyRewardToCardSafely(choice, selectedCard);
+            ApplyRewardToCardSafely(roundNumber, choice, selectedCard, combatState);
         }
         catch (Exception exception)
         {
             Log.Warn("[KaoyanEnglishMod] Official hand select UI unavailable; using temporary Kaoyan hand choice popup.");
             Log.Error(exception.ToString());
-            SelectHandCardForRewardWithTemporaryPopupSafely(choice, rewardName);
+            SelectHandCardForRewardWithTemporaryPopupSafely(roundNumber, choice, rewardName, combatState);
+            return;
         }
+        finally
+        {
+            if (_handChoiceInProgress)
+            {
+                _handChoiceInProgress = false;
+            }
+        }
+
+        CompleteKaoyanQuestionFlow();
     }
 
-    private void SelectHandCardForRewardWithTemporaryPopupSafely(KaoyanRewardChoice choice, string rewardName)
+    private void SelectHandCardForRewardWithTemporaryPopupSafely(
+        int roundNumber,
+        KaoyanRewardChoice choice,
+        string rewardName,
+        CombatState combatState)
     {
         try
         {
+            if (!IsKaoyanCombatStillActive(combatState))
+            {
+                CancelPendingKaoyanFlow();
+                return;
+            }
+
             var handCards = PileType.Hand.GetPile(Owner).Cards.ToList();
             if (handCards.Count == 0)
             {
                 Log.Warn($"[KaoyanEnglishMod] {rewardName} reward skipped: hand is empty.");
+                CompleteKaoyanQuestionFlow();
                 return;
             }
 
@@ -340,24 +612,44 @@ public sealed class KaoyanLexicon : RelicModel
                 handCards,
                 "\u9009\u62e9\u624b\u724c",
                 GetRewardSelectionBody(choice),
-                card => ApplyRewardToCardSafely(choice, card));
+                card =>
+                {
+                    _handChoiceInProgress = false;
+                    ApplyRewardToCardSafely(roundNumber, choice, card, combatState);
+                    CompleteKaoyanQuestionFlow();
+                });
 
             if (!popupShown)
             {
+                _handChoiceInProgress = false;
+                CompleteKaoyanQuestionFlow();
                 Log.Warn($"[KaoyanEnglishMod] Failed to show hand card choice popup; {rewardName} reward skipped.");
             }
         }
         catch (Exception fallbackException)
         {
+            _handChoiceInProgress = false;
+            CompleteKaoyanQuestionFlow();
             Log.Error("[KaoyanEnglishMod] Failed to apply reward.");
             Log.Error(fallbackException.ToString());
         }
     }
 
-    private void ApplyRewardToCardSafely(KaoyanRewardChoice choice, CardModel card)
+    private void ApplyRewardToCardSafely(int roundNumber, KaoyanRewardChoice choice, CardModel card, CombatState combatState)
     {
         try
         {
+            if (!IsKaoyanCombatStillActive(combatState))
+            {
+                CancelPendingKaoyanFlow();
+                return;
+            }
+
+            if (_lastRewardAppliedRound == roundNumber)
+            {
+                return;
+            }
+
             var rewardName = GetRewardLogName(choice);
             var handCards = PileType.Hand.GetPile(Owner).Cards;
             if (!handCards.Contains(card))
@@ -372,10 +664,12 @@ public sealed class KaoyanLexicon : RelicModel
             switch (choice)
             {
                 case KaoyanRewardChoice.Replay:
+                    _lastRewardAppliedRound = roundNumber;
                     card.BaseReplayCount++;
                     Log.Warn("[KaoyanEnglishMod] Replay reward applied.");
                     break;
                 case KaoyanRewardChoice.FreeThisTurn:
+                    _lastRewardAppliedRound = roundNumber;
                     card.SetToFreeThisTurn();
                     Log.Warn("[KaoyanEnglishMod] FreeThisTurn reward applied.");
                     break;
@@ -415,8 +709,11 @@ public sealed class KaoyanLexicon : RelicModel
     {
         try
         {
-            if (!ReferenceEquals(_currentCombatState, combatState) || _challengeMode != KaoyanChallengeMode.Challenge)
+            if (!ReferenceEquals(_currentCombatState, combatState)
+                || _challengeMode != KaoyanChallengeMode.Challenge
+                || !IsKaoyanCombatStillActive(combatState))
             {
+                CancelPendingKaoyanFlow();
                 return;
             }
 
@@ -445,6 +742,92 @@ public sealed class KaoyanLexicon : RelicModel
             Log.Error("[KaoyanEnglishMod] Failed to apply wrong answer penalty.");
             Log.Error(exception.ToString());
         }
+        finally
+        {
+            CompleteKaoyanQuestionFlow();
+        }
+    }
+
+    private bool CanStartKaoyanQuestionNow(
+        CombatState combatState,
+        int roundNumber,
+        bool allowChallengePrompt = false)
+    {
+        if (_lastQuestionRound == roundNumber)
+        {
+            return false;
+        }
+
+        if (!IsKaoyanCombatStillActive(combatState))
+        {
+            return false;
+        }
+
+        if (_questionInProgress || _rewardChoiceInProgress || _handChoiceInProgress)
+        {
+            return false;
+        }
+
+        if (_challengePromptInProgress && !allowChallengePrompt)
+        {
+            return false;
+        }
+
+        var modalContainer = NModalContainer.Instance;
+        if (modalContainer == null || modalContainer.OpenModal != null)
+        {
+            return false;
+        }
+
+        var combatManager = CombatManager.Instance;
+        if (combatManager == null)
+        {
+            return false;
+        }
+
+        return combatManager.IsPlayPhase
+            && !combatManager.PlayerActionsDisabled
+            && !combatManager.EndingPlayerTurnPhaseOne
+            && !combatManager.EndingPlayerTurnPhaseTwo
+            && combatManager.IsPartOfPlayerTurn(Owner);
+    }
+
+    private bool IsKaoyanCombatStillActive(CombatState combatState)
+    {
+        if (!ReferenceEquals(_currentCombatState, combatState))
+        {
+            return false;
+        }
+
+        var combatManager = CombatManager.Instance;
+        if (combatManager == null
+            || !combatManager.IsInProgress
+            || combatManager.IsOverOrEnding
+            || combatManager.IsEnding
+            || combatManager.IsAboutToLose
+            || combatManager.IsPaused)
+        {
+            return false;
+        }
+
+        if (combatState.CurrentSide != Owner.Creature.Side)
+        {
+            return false;
+        }
+
+        if (Owner.Creature.CurrentHp <= 0)
+        {
+            return false;
+        }
+
+        return combatState.HittableEnemies.Any(enemy => enemy.CurrentHp > 0);
+    }
+
+    private void CompleteKaoyanQuestionFlow()
+    {
+        _questionInProgress = false;
+        _rewardChoiceInProgress = false;
+        _handChoiceInProgress = false;
     }
 
     private static string GetCardLogLabel(CardModel card)

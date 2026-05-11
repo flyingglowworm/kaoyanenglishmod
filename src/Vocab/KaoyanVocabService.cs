@@ -9,12 +9,51 @@ namespace KaoyanEnglishMod.Vocab;
 
 public sealed class KaoyanVocabService
 {
+    private const int MinimumEffectiveWeight = 3;
+    private const int MaximumEffectiveWeight = 10;
+
     public const string DefaultVocabPath = "res://KaoyanEnglishMod/data/kaoyan_words_mod.json";
 
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         PropertyNameCaseInsensitive = true,
     };
+
+    private static readonly List<KaoyanWord> FallbackWords =
+    [
+        new()
+        {
+            Id = "fallback_analyze",
+            Rank = 1,
+            Word = "analyze",
+            ZhMeaning = "\u5206\u6790",
+            Difficulty = "fallback",
+        },
+        new()
+        {
+            Id = "fallback_evaluate",
+            Rank = 2,
+            Word = "evaluate",
+            ZhMeaning = "\u8bc4\u4f30",
+            Difficulty = "fallback",
+        },
+        new()
+        {
+            Id = "fallback_context",
+            Rank = 3,
+            Word = "context",
+            ZhMeaning = "\u8bed\u5883",
+            Difficulty = "fallback",
+        },
+        new()
+        {
+            Id = "fallback_contrast",
+            Rank = 4,
+            Word = "contrast",
+            ZhMeaning = "\u5bf9\u6bd4",
+            Difficulty = "fallback",
+        },
+    ];
 
     private readonly Random _random;
     private List<KaoyanWord> _words = [];
@@ -36,32 +75,23 @@ public sealed class KaoyanVocabService
         using var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
         if (file is null)
         {
-            var error = FileAccess.GetOpenError();
-            throw new InvalidOperationException($"Failed to open vocab resource '{path}'. Godot error: {error}.");
+            _words = BuildUsableWords([]);
+            return;
         }
 
         var json = file.GetAsText();
-        var words = JsonSerializer.Deserialize<List<KaoyanWord>>(json, JsonOptions);
-        if (words is null || words.Count == 0)
-        {
-            throw new InvalidOperationException($"Vocab resource '{path}' did not contain any words.");
-        }
-
-        _words = words
-            .Where(IsUsableWord)
-            .ToList();
-
-        if (_words.Count < 4)
-        {
-            throw new InvalidOperationException($"Vocab resource '{path}' must contain at least 4 usable words.");
-        }
+        var words = DeserializeWordsSafely(json);
+        _words = BuildUsableWords(words ?? []);
     }
 
     public KaoyanWord GetRandomWordByWeight()
     {
         EnsureLoaded();
 
-        var totalWeight = _words.Sum(word => Math.Max(0, word.SpawnWeight));
+        var rankedWords = _words.Where(word => word.Rank > 0).ToList();
+        var minRank = rankedWords.Count > 0 ? rankedWords.Min(word => word.Rank) : 0;
+        var maxRank = rankedWords.Count > 0 ? rankedWords.Max(word => word.Rank) : 0;
+        var totalWeight = _words.Sum(word => CalculateEffectiveWeight(word, minRank, maxRank));
         if (totalWeight <= 0)
         {
             return _words[_random.Next(_words.Count)];
@@ -71,7 +101,7 @@ public sealed class KaoyanVocabService
         var accumulatedWeight = 0;
         foreach (var word in _words)
         {
-            accumulatedWeight += Math.Max(0, word.SpawnWeight);
+            accumulatedWeight += CalculateEffectiveWeight(word, minRank, maxRank);
             if (roll < accumulatedWeight)
             {
                 return word;
@@ -109,6 +139,67 @@ public sealed class KaoyanVocabService
             && !string.IsNullOrWhiteSpace(word.Word)
             && !string.IsNullOrWhiteSpace(word.ZhMeaning)
             && !string.IsNullOrWhiteSpace(word.Difficulty);
+    }
+
+    private static List<KaoyanWord>? DeserializeWordsSafely(string json)
+    {
+        try
+        {
+            return JsonSerializer.Deserialize<List<KaoyanWord>>(json, JsonOptions);
+        }
+        catch (JsonException)
+        {
+            return null;
+        }
+    }
+
+    private static List<KaoyanWord> BuildUsableWords(IEnumerable<KaoyanWord> words)
+    {
+        var usableWords = new List<KaoyanWord>();
+        var usedMeanings = new HashSet<string>(StringComparer.Ordinal);
+
+        AddUniqueUsableWords(words, usableWords, usedMeanings);
+
+        if (usableWords.Count < 4)
+        {
+            AddUniqueUsableWords(FallbackWords, usableWords, usedMeanings);
+        }
+
+        return usableWords;
+    }
+
+    private static void AddUniqueUsableWords(
+        IEnumerable<KaoyanWord> candidates,
+        List<KaoyanWord> usableWords,
+        HashSet<string> usedMeanings)
+    {
+        foreach (var candidate in candidates)
+        {
+            if (IsUsableWord(candidate) && usedMeanings.Add(candidate.ZhMeaning))
+            {
+                usableWords.Add(candidate);
+            }
+        }
+    }
+
+    private static int CalculateEffectiveWeight(KaoyanWord word, int minRank, int maxRank)
+    {
+        if (word.Rank <= 0 || minRank <= 0 || maxRank <= 0)
+        {
+            return MinimumEffectiveWeight;
+        }
+
+        if (minRank == maxRank)
+        {
+            return MaximumEffectiveWeight;
+        }
+
+        var position = (double)(word.Rank - minRank) / (maxRank - minRank);
+        var distanceFromMiddle = Math.Abs(position - 0.5d) * 2d;
+        var middleBoost = 1d - Math.Clamp(distanceFromMiddle, 0d, 1d);
+        var weight = MinimumEffectiveWeight + (MaximumEffectiveWeight - MinimumEffectiveWeight) * middleBoost;
+
+        return Math.Max(MinimumEffectiveWeight, (int)Math.Round(weight, MidpointRounding.AwayFromZero));
     }
 
     private List<KaoyanWord> GetDistractors(KaoyanWord correctWord, int count)
