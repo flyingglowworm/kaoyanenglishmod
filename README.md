@@ -1,4 +1,4 @@
-# 考研英语 KaoyanEnglishMod
+# 杀戮尖塔2考研英语 KaoyanEnglishMod
 
 Slay the Spire 2 的 Godot C# 独立 Mod。
 
