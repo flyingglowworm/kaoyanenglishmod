@@ -1,3 +1,16 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# Local tooling and generated build artifacts
+.tools/
+*.lscache
+build/*.dll
+build/*.json
+build/*.pck
+build/*.zip
+build/*.docx
+
+# Local design/reference assets
+photos_for_UI/
+photos_for_UI.zip

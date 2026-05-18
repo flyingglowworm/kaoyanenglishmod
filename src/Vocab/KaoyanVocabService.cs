@@ -13,6 +13,10 @@ public sealed class KaoyanVocabService
     private const int MiddleEffectiveWeight = 10;
     private const int LowFrequencyEdgeWeight = 4;
     private const double MiddlePeakPosition = 0.62d;
+    private const int MistakeWeightMultiplier = 100;
+    private const double DynamicDifficultyMaxSwing = 0.8d;
+    private const double DynamicDifficultyMinMultiplier = 0.5d;
+    private const double DynamicDifficultyMaxMultiplier = 1.8d;
 
     public const string DefaultVocabPath = "res://KaoyanEnglishMod/data/kaoyan_words_mod.json";
 
@@ -77,47 +81,86 @@ public sealed class KaoyanVocabService
         using var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
         if (file is null)
         {
-            _words = BuildUsableWords([]);
+            _words = BuildUsableWords(Array.Empty<KaoyanWord>());
             return;
         }
 
-        var json = file.GetAsText();
+        var json = file.GetAsText(false);
         var words = DeserializeWordsSafely(json);
-        _words = BuildUsableWords(words ?? []);
+        _words = BuildUsableWords(words ?? new List<KaoyanWord>());
     }
 
-    public KaoyanWord GetRandomWordByWeight()
+    public KaoyanWord GetRandomWordByWeight(
+        IReadOnlySet<string>? excludedWordIds = null,
+        IReadOnlyDictionary<string, int>? mistakeCountsByWordId = null,
+        string? forcedWordId = null,
+        double difficultyBias = MiddlePeakPosition)
     {
         EnsureLoaded();
 
-        var rankedWords = _words.Where(word => word.Rank > 0).ToList();
+        var candidates = _words
+            .Where(word => !IsExcludedWord(word, excludedWordIds))
+            .ToList();
+        if (candidates.Count == 0)
+        {
+            candidates = _words;
+        }
+
+        if (!string.IsNullOrWhiteSpace(forcedWordId))
+        {
+            var forcedWord = candidates.FirstOrDefault(word => word.Id == forcedWordId);
+            if (forcedWord != null)
+            {
+                return forcedWord;
+            }
+        }
+
+        var rankedWords = candidates.Where(word => word.Rank > 0).ToList();
         var minRank = rankedWords.Count > 0 ? rankedWords.Min(word => word.Rank) : 0;
         var maxRank = rankedWords.Count > 0 ? rankedWords.Max(word => word.Rank) : 0;
-        var totalWeight = _words.Sum(word => CalculateEffectiveWeight(word, minRank, maxRank));
+        var totalWeight = candidates.Sum(word => CalculateSelectionWeight(
+            word,
+            minRank,
+            maxRank,
+            mistakeCountsByWordId,
+            difficultyBias));
         if (totalWeight <= 0)
         {
-            return _words[_random.Next(_words.Count)];
+            return candidates[_random.Next(candidates.Count)];
         }
 
         var roll = _random.Next(totalWeight);
         var accumulatedWeight = 0;
-        foreach (var word in _words)
+        foreach (var word in candidates)
         {
-            accumulatedWeight += CalculateEffectiveWeight(word, minRank, maxRank);
+            accumulatedWeight += CalculateSelectionWeight(
+                word,
+                minRank,
+                maxRank,
+                mistakeCountsByWordId,
+                difficultyBias);
             if (roll < accumulatedWeight)
             {
                 return word;
             }
         }
 
-        return _words[^1];
+        return candidates[^1];
     }
 
-    public KaoyanQuestion CreateQuestion()
+    public KaoyanQuestion CreateQuestion(
+        IReadOnlySet<string>? excludedWordIds = null,
+        IReadOnlyDictionary<string, int>? mistakeCountsByWordId = null,
+        string? forcedWordId = null,
+        double difficultyBias = MiddlePeakPosition)
     {
         EnsureLoaded();
 
-        var correctWord = GetRandomWordByWeight();
+        var correctWord = GetRandomWordByWeight(
+            excludedWordIds,
+            mistakeCountsByWordId,
+            forcedWordId,
+            difficultyBias);
         var distractors = GetDistractors(correctWord, 3);
         var options = distractors
             .Select(word => word.ZhMeaning)
@@ -211,6 +254,69 @@ public sealed class KaoyanVocabService
 
         var roundedWeight = (int)Math.Round(weight, MidpointRounding.AwayFromZero);
         return Math.Clamp(roundedWeight, HighFrequencyEdgeWeight, MiddleEffectiveWeight);
+    }
+
+    private static int CalculateSelectionWeight(
+        KaoyanWord word,
+        int minRank,
+        int maxRank,
+        IReadOnlyDictionary<string, int>? mistakeCountsByWordId,
+        double difficultyBias)
+    {
+        var baseWeight = CalculateEffectiveWeight(word, minRank, maxRank);
+        var dynamicMultiplier = CalculateDynamicDifficultyMultiplier(word, minRank, maxRank, difficultyBias);
+        var mistakeMultiplier = CalculateMistakeMultiplier(word, mistakeCountsByWordId);
+        var weightedValue = baseWeight * dynamicMultiplier * mistakeMultiplier;
+        return Math.Max(1, (int)Math.Round(weightedValue, MidpointRounding.AwayFromZero));
+    }
+
+    private static double CalculateDynamicDifficultyMultiplier(
+        KaoyanWord word,
+        int minRank,
+        int maxRank,
+        double difficultyBias)
+    {
+        if (word.Rank <= 0 || minRank <= 0 || maxRank <= 0 || minRank == maxRank)
+        {
+            return 1d;
+        }
+
+        var position = Math.Clamp((double)(word.Rank - minRank) / (maxRank - minRank), 0d, 1d);
+        var targetPosition = Math.Clamp(difficultyBias, 0d, 1d);
+        var shift = targetPosition - MiddlePeakPosition;
+        if (Math.Abs(shift) < 0.001d)
+        {
+            return 1d;
+        }
+
+        var directionScore = shift > 0d
+            ? (position - MiddlePeakPosition) / (1d - MiddlePeakPosition)
+            : (MiddlePeakPosition - position) / MiddlePeakPosition;
+        directionScore = Math.Clamp(directionScore, -1d, 1d);
+
+        var maxShift = shift > 0d ? 1d - MiddlePeakPosition : MiddlePeakPosition;
+        var intensity = Math.Clamp(Math.Abs(shift) / maxShift, 0d, 1d);
+        var multiplier = 1d + directionScore * intensity * DynamicDifficultyMaxSwing;
+        return Math.Clamp(multiplier, DynamicDifficultyMinMultiplier, DynamicDifficultyMaxMultiplier);
+    }
+
+    private static int CalculateMistakeMultiplier(
+        KaoyanWord word,
+        IReadOnlyDictionary<string, int>? mistakeCountsByWordId)
+    {
+        if (mistakeCountsByWordId == null
+            || !mistakeCountsByWordId.TryGetValue(word.Id, out var mistakeCount)
+            || mistakeCount <= 0)
+        {
+            return 1;
+        }
+
+        return MistakeWeightMultiplier * mistakeCount;
+    }
+
+    private static bool IsExcludedWord(KaoyanWord word, IReadOnlySet<string>? excludedWordIds)
+    {
+        return excludedWordIds != null && excludedWordIds.Contains(word.Id);
     }
 
     private List<KaoyanWord> GetDistractors(KaoyanWord correctWord, int count)

@@ -1,8 +1,8 @@
 {
   "KAOYAN_LEXICON.title": "考研词典",
-  "KAOYAN_LEXICON.description": "战斗开始时，选择挑战或不挑战。\n不挑战：获得1点力量和1点敏捷。\n挑战：每回合额外抽1张牌并回答1道词汇题。\n答对：选择1张手牌，使其获得重放1或本回合免费。\n答错：随机消耗1张手牌。",
+  "KAOYAN_LEXICON.description": "战斗开始时，选择[gold]挑战[/gold]或[gold]不挑战[/gold]。\n[gold]不挑战[/gold]：获得[blue]1[/blue]点力量和[blue]1[/blue]点敏捷。\n[gold]挑战[/gold]：每回合额外抽[blue]1[/blue]张牌并回答[blue]1[/blue]道词汇题。\n[gold]答对[/gold]：选择[blue]1[/blue]张手牌，使其获得重放[blue]1[/blue]或本回合免费。\n[gold]答错[/gold]：随机消耗[blue]1[/blue]张手牌。",
   "KAOYAN_LEXICON.flavor": "每一页都写着昨晚背过、今早又忘掉的单词。",
   "KaoyanLexicon.title": "考研词典",
-  "KaoyanLexicon.description": "战斗开始时，选择挑战或不挑战。\n不挑战：获得1点力量和1点敏捷。\n挑战：每回合额外抽1张牌并回答1道词汇题。\n答对：选择1张手牌，使其获得重放1或本回合免费。\n答错：随机消耗1张手牌。",
+  "KaoyanLexicon.description": "战斗开始时，选择[gold]挑战[/gold]或[gold]不挑战[/gold]。\n[gold]不挑战[/gold]：获得[blue]1[/blue]点力量和[blue]1[/blue]点敏捷。\n[gold]挑战[/gold]：每回合额外抽[blue]1[/blue]张牌并回答[blue]1[/blue]道词汇题。\n[gold]答对[/gold]：选择[blue]1[/blue]张手牌，使其获得重放[blue]1[/blue]或本回合免费。\n[gold]答错[/gold]：随机消耗[blue]1[/blue]张手牌。",
   "KaoyanLexicon.flavor": "每一页都写着昨晚背过、今早又忘掉的单词。"
 }

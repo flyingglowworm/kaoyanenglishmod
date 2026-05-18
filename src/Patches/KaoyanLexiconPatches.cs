@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Godot;
@@ -6,11 +7,13 @@ using KaoyanEnglishMod.Relics;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.UI;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Characters;
 using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using MegaCrit.Sts2.Core.Nodes.Relics;
 using MegaCrit.Sts2.Core.Nodes.Screens.RelicCollection;
+using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.Saves;
 
 namespace KaoyanEnglishMod.Patches;
@@ -82,5 +85,37 @@ public static class KaoyanLexiconLockedCollectionIconPatch
         relicNode.MouseFilter = Control.MouseFilterEnum.Ignore;
         relicNode.FocusMode = Control.FocusModeEnum.None;
         AccessTools.Field(typeof(NRelicCollectionEntry), "_relicNode")?.SetValue(__instance, relicNode);
+    }
+}
+
+[HarmonyPatch(typeof(RunManager), "OnEnded")]
+public static class KaoyanLexiconRunEndedPatch
+{
+    public static void Prefix(RunManager __instance, bool isVictory, out RunState? __state)
+    {
+        __state = __instance.DebugOnlyGetState();
+    }
+
+    public static void Postfix(bool isVictory, RunState? __state)
+    {
+        try
+        {
+            if (__state == null)
+            {
+                return;
+            }
+
+            foreach (var lexicon in __state.Players
+                .SelectMany(player => player.Relics)
+                .OfType<KaoyanLexicon>())
+            {
+                lexicon.LogRunVocabSummary(isVictory);
+            }
+        }
+        catch (Exception exception)
+        {
+            Log.Error("[KaoyanEnglishMod] Failed to log run vocab summary.");
+            Log.Error(exception.ToString());
+        }
     }
 }

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Godot;
 using KaoyanEnglishMod.Vocab;
 using MegaCrit.Sts2.Core.Logging;
@@ -10,9 +12,13 @@ namespace KaoyanEnglishMod.UI;
 public sealed partial class KaoyanQuestionPopup : Control, IScreenContext
 {
     private static readonly string[] OptionLabels = ["A", "B", "C", "D"];
+    private static readonly Color CorrectAnswerTint = new(0.26f, 0.86f, 0.42f, 1f);
+    private static readonly Color WrongAnswerTint = new(0.92f, 0.24f, 0.20f, 1f);
+    private const double AnswerFeedbackSeconds = 0.65d;
 
     private KaoyanQuestion? _question;
     private Action<int?>? _onAnswered;
+    private readonly List<AnswerOptionUi> _answerOptions = [];
     private bool _answered;
 
     public Control? DefaultFocusedControl => null;
@@ -87,14 +93,7 @@ public sealed partial class KaoyanQuestionPopup : Control, IScreenContext
 
         for (var index = 0; index < _question.Options.Count && index < OptionLabels.Length; index++)
         {
-            var answerIndex = index;
-            var button = KaoyanUiStyle.CreateImageButton(
-                $"{OptionLabels[index]}. {_question.Options[index]}",
-                false,
-                new Vector2(0f, 52f),
-                18,
-                () => HandleAnswer(answerIndex));
-            content.AddChild(button);
+            content.AddChild(CreateAnswerButton(index));
         }
 
         var skipButton = KaoyanUiStyle.CreateImageButton(
@@ -106,7 +105,94 @@ public sealed partial class KaoyanQuestionPopup : Control, IScreenContext
         content.AddChild(skipButton);
     }
 
-    private void HandleAnswer(int? answerIndex)
+    private Control CreateAnswerButton(int answerIndex)
+    {
+        var text = $"{OptionLabels[answerIndex]}. {_question!.Options[answerIndex]}";
+        var normal = KaoyanUiStyle.TryLoadTexture(KaoyanUiStyle.ButtonNormalPath);
+        if (normal == null)
+        {
+            var fallback = new Button
+            {
+                Text = text,
+                SizeFlagsHorizontal = SizeFlags.ExpandFill,
+                CustomMinimumSize = new Vector2(0f, 52f),
+            };
+            KaoyanUiStyle.StylePrimaryButton(fallback);
+            fallback.Pressed += () => HandleAnswer(answerIndex);
+            _answerOptions.Add(new AnswerOptionUi(fallback, fallback, null, null, null));
+            return fallback;
+        }
+
+        var hover = KaoyanUiStyle.TryLoadTexture(KaoyanUiStyle.ButtonHoverPath) ?? normal;
+        var pressed = KaoyanUiStyle.TryLoadTexture(KaoyanUiStyle.ButtonPressedPath) ?? hover;
+        var root = new Control
+        {
+            SizeFlagsHorizontal = SizeFlags.ExpandFill,
+            CustomMinimumSize = new Vector2(0f, 52f),
+        };
+
+        var image = new TextureRect
+        {
+            Texture = normal,
+            ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
+            StretchMode = TextureRect.StretchModeEnum.Scale,
+            MouseFilter = MouseFilterEnum.Ignore,
+        };
+        image.SetAnchorsPreset(LayoutPreset.FullRect);
+        root.AddChild(image);
+
+        var label = KaoyanUiStyle.CreateLabel(text, 18, KaoyanUiStyle.BodyText);
+        label.VerticalAlignment = VerticalAlignment.Center;
+        label.MouseFilter = MouseFilterEnum.Ignore;
+        label.SetAnchorsPreset(LayoutPreset.FullRect);
+        root.AddChild(label);
+
+        var clickLayer = new Button
+        {
+            Text = string.Empty,
+            Flat = true,
+        };
+        clickLayer.SetAnchorsPreset(LayoutPreset.FullRect);
+        clickLayer.AddThemeStyleboxOverride("normal", new StyleBoxEmpty());
+        clickLayer.AddThemeStyleboxOverride("hover", new StyleBoxEmpty());
+        clickLayer.AddThemeStyleboxOverride("pressed", new StyleBoxEmpty());
+        clickLayer.AddThemeStyleboxOverride("focus", new StyleBoxEmpty());
+        clickLayer.MouseEntered += () =>
+        {
+            if (!_answered)
+            {
+                image.Texture = hover;
+            }
+        };
+        clickLayer.MouseExited += () =>
+        {
+            if (!_answered)
+            {
+                image.Texture = normal;
+            }
+        };
+        clickLayer.ButtonDown += () =>
+        {
+            if (!_answered)
+            {
+                image.Texture = pressed;
+            }
+        };
+        clickLayer.ButtonUp += () =>
+        {
+            if (!_answered)
+            {
+                image.Texture = hover;
+            }
+        };
+        clickLayer.Pressed += () => HandleAnswer(answerIndex);
+        root.AddChild(clickLayer);
+
+        _answerOptions.Add(new AnswerOptionUi(clickLayer, root, image, label, normal));
+        return root;
+    }
+
+    private async void HandleAnswer(int? answerIndex)
     {
         if (_answered)
         {
@@ -114,6 +200,12 @@ public sealed partial class KaoyanQuestionPopup : Control, IScreenContext
         }
 
         _answered = true;
+
+        if (answerIndex != null)
+        {
+            ShowAnswerFeedback(answerIndex.Value);
+            await WaitForAnswerFeedbackAsync();
+        }
 
         try
         {
@@ -135,4 +227,61 @@ public sealed partial class KaoyanQuestionPopup : Control, IScreenContext
             Log.Error(exception.ToString());
         }
     }
+
+    private void ShowAnswerFeedback(int answerIndex)
+    {
+        if (_question == null)
+        {
+            return;
+        }
+
+        for (var index = 0; index < _answerOptions.Count; index++)
+        {
+            var option = _answerOptions[index];
+            option.ClickLayer.Disabled = true;
+            option.ClickLayer.MouseFilter = MouseFilterEnum.Ignore;
+
+            if (index == _question.CorrectIndex)
+            {
+                ApplyAnswerFeedback(option, CorrectAnswerTint);
+            }
+            else if (index == answerIndex)
+            {
+                ApplyAnswerFeedback(option, WrongAnswerTint);
+            }
+        }
+    }
+
+    private static void ApplyAnswerFeedback(AnswerOptionUi option, Color tint)
+    {
+        if (option.Image != null)
+        {
+            option.Image.Texture = option.NormalTexture;
+            option.Image.SelfModulate = tint;
+        }
+        else
+        {
+            option.Root.SelfModulate = tint;
+        }
+
+        option.Label?.AddThemeColorOverride("font_color", Colors.White);
+    }
+
+    private async Task WaitForAnswerFeedbackAsync()
+    {
+        var tree = GetTree();
+        if (tree == null)
+        {
+            return;
+        }
+
+        await ToSignal(tree.CreateTimer(AnswerFeedbackSeconds), SceneTreeTimer.SignalName.Timeout);
+    }
+
+    private sealed record AnswerOptionUi(
+        Button ClickLayer,
+        Control Root,
+        TextureRect? Image,
+        Label? Label,
+        Texture2D? NormalTexture);
 }
