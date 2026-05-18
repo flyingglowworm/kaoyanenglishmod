@@ -2,14 +2,30 @@
 .godot/
 /android/
 
-# Local tooling and generated build artifacts
-.tools/
+# Build outputs and generated packages
+build/
+bin/
+obj/
+*.dll
+*.pdb
+*.pck
+*.zip
+*.docx
 *.lscache
-build/*.dll
-build/*.json
-build/*.pck
-build/*.zip
-build/*.docx
+
+# Local game dependency copies
+# Developers should copy these from their own Slay the Spire 2 install when building locally.
+deps/
+
+# Local tooling and caches
+.tools/
+.vs/
+.vscode/
+
+# Local logs and test output
+*.log
+kaoyan_smoke.log
+kaoyan_console.log
 
 # Local design/reference assets
 photos_for_UI/

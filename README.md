@@ -1,80 +1,94 @@
-# 考研英语 KaoyanEnglishMod
+# KaoyanEnglishMod
 
-这是一个 Slay the Spire 2 的 Godot C# 独立 Mod。
+KaoyanEnglishMod 是一个面向 **Slay the Spire 2** 的 Godot C# Mod。它添加了一个“考研词典”遗物，让玩家在战斗中通过考研英语词汇题获得奖励，同时承担答错惩罚。
 
-## Mod 内容
+## 功能
 
-开局获得遗物：考研词典。
+- 战斗开始时选择是否接受考研英语挑战。
+- 接受挑战后，每个玩家回合会出现一道词义选择题。
+- 答对后可以选择一张手牌获得 Replay 1，或使其本回合免费。
+- 答错后随机消耗一张手牌。
+- 支持按词频 rank 和动态难度权重抽题。
+- 记录本局答题表现、错词和掌握情况，并在 Run 结束时展示错词回顾。
+- 已修复与官方开局选牌流程、满手牌、禁抽和小提琴等场景的流程冲突。
+- 当前联机同步方案会通过 `NetKaoyan*Action` 和官方 Action Queue 同步影响战斗状态的结果。
 
-战斗开始后，玩家可以选择是否挑战考研英语单词。
+## 安装
 
-不挑战：
-- 本场战斗获得 1 点力量和 1 点敏捷。
+从 GitHub Releases 下载玩家安装包，例如：
 
-挑战：
-- 每个玩家回合开始后额外抽 1 张牌。
-- 每回合回答一道考研英语词汇题。
-- 答对后选择一个奖励：
-  - 选择一张手牌，本场战斗获得 Replay 1。
-  - 选择一张手牌，本回合免费打出。
-- 答错后随机消耗 1 张手牌。
-- 可以跳过题目，跳过没有奖励也没有惩罚。
+```text
+KaoyanEnglishMod-v0.1.2.zip
+```
 
-## 当前开发进度
-
-当前版本：v0.1.0 初版
-
-已实现：
-- 五个当前角色开局获得考研词典。
-- 考研词典可在图鉴中显示。
-- 考研词库按 Rank 进行中频优先的动态权重抽题。
-- 挑战 / 不挑战流程。
-- 答题 UI。
-- 答对奖励选择。
-- Replay / FreeThisTurn 奖励。
-- 答错随机消耗手牌。
-- 修复了考研题与原版回合开始选牌流程冲突的问题。
-
-已知限制：
-- 目前只有简体中文文本。
-- UI 和数值仍可能继续调整。
-- 这是早期版本，可能与未来游戏更新不兼容。
-
-## 安装方法
-
-**1. 下载 Release 页面中的 `KaoyanEnglishMod-v0.1.0.zip`。**
-   
-**2. 解压后应得到文件夹：**
+解压后应得到：
 
 ```text
 KaoyanEnglishMod/
   KaoyanEnglishMod.dll
   KaoyanEnglishMod.pck
-  KaoyanEnglishMod.json
+  mod_manifest.json
 ```
 
-**将整个 KaoyanEnglishMod 文件夹复制到 Slay the Spire 2 的 mods 目录：**
-（*注：如果没有这个文件夹，只需要自己在Slay the spire2的目录中添加 \mods即可* )
+将整个 `KaoyanEnglishMod` 文件夹复制到 Slay the Spire 2 的 `mods` 目录：
 
+```text
+...\SteamLibrary\steamapps\common\Slay the Spire 2\mods\KaoyanEnglishMod
 ```
-...\SteamLibrary\steamapps\common\Slay the Spire 2\mods\
-```
-**最终路径应类似：**
-```
-...\Slay the Spire 2\mods\KaoyanEnglishMod\KaoyanEnglishMod.dll
-...\Slay the Spire 2\mods\KaoyanEnglishMod\KaoyanEnglishMod.pck
-...\Slay the Spire 2\mods\KaoyanEnglishMod\KaoyanEnglishMod.json
-```
-## 卸载方法
-删除下面路径的文件即可：
 
-```
-...\Slay the Spire 2\mods\KaoyanEnglishMod
-```
-## 开发说明
-本项目是 Godot C# Mod。
+## 从源码构建
 
-**如何重新构建文件？**
-1、修改完源文件后 dotnet build
-2、修改 C# 后需要重新构建 DLL。
-3、修改图片、JSON、.tres 或导出清单后，需要重新导出 PCK。
+本仓库只保存源码、Godot 工程文件、词库和 Mod 必要资源。构建依赖 DLL 不随仓库分发。
+
+本地开发前，请自行从你的 Slay the Spire 2 安装目录或合法 SDK 来源准备依赖，并放入：
+
+```text
+deps/
+  0Harmony.dll
+  GodotSharp.dll
+  sts2.dll
+```
+
+然后运行：
+
+```powershell
+dotnet build
+```
+
+构建输出通常位于：
+
+```text
+.godot/mono/temp/bin/Debug/KaoyanEnglishMod.dll
+```
+
+## 仓库内容
+
+应该提交到源码仓库的内容包括：
+
+- `src/`：C# 源码。
+- `KaoyanEnglishMod/data/`：词库数据。
+- `KaoyanEnglishMod/images/`：Mod 运行必要图片资源。
+- `KaoyanEnglishMod/localization/`：本地化文本。
+- `*.csproj`、`*.sln`、`project.godot`、`mod_manifest.json` 等工程文件。
+- `docs/`：开发记录和参考文档。
+
+不应该提交的内容包括：
+
+- `.godot/`、`bin/`、`obj/`、`build/`。
+- 本地测试日志。
+- `photos_for_UI/` 等设计参考素材。
+- 从游戏本体复制出来的依赖 DLL。
+
+## 版本发布
+
+源码通过 Git 分支保存。玩家下载包请通过 GitHub Releases 发布，建议命名为：
+
+```text
+KaoyanEnglishMod-v0.1.2.zip
+```
+
+Release 包应包含运行 Mod 必需的 DLL、PCK、manifest、词库和图片资源，但不应包含源码仓库里的临时素材或本地日志。
+
+## 许可证
+
+本项目使用 MIT License。详见 [LICENSE](LICENSE)。
