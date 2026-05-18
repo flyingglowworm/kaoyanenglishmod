@@ -18,6 +18,7 @@ using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
@@ -25,6 +26,7 @@ using MegaCrit.Sts2.Core.Multiplayer.Game;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.Nodes.Rooms;
+using MegaCrit.Sts2.Core.Nodes.Screens.Overlays;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Runs;
 
@@ -45,6 +47,7 @@ public sealed class KaoyanLexicon : RelicModel
     private const double CorrectDifficultyBiasStep = 0.04d;
     private const double WrongDifficultyBiasStep = 0.08d;
     private const int CorrectStreakBeforeDifficultyIncrease = 2;
+    private const double OfficialSelectionQuietWindowSeconds = 0.35d;
 
     private static readonly MethodInfo? WaitUntilQueueIsSafeMethod = typeof(CombatManager).GetMethod(
         "WaitUntilQueueIsEmptyOrWaitingOnNonPlayerDrivenAction",
@@ -64,6 +67,7 @@ public sealed class KaoyanLexicon : RelicModel
     private bool _questionInProgress;
     private bool _rewardChoiceInProgress;
     private bool _handChoiceInProgress;
+    private DateTime _lastOfficialSelectionBusyUtc = DateTime.MinValue;
     private KaoyanVocabService? _vocabService;
     private bool _vocabLoaded;
     private readonly HashSet<string> _runCorrectWordIds = new(StringComparer.Ordinal);
@@ -564,6 +568,8 @@ public sealed class KaoyanLexicon : RelicModel
 
             await DelayBeforeNextSafetyProbeAsync();
         }
+
+        await DelayForChoiceUiSettleAsync();
 
         while (ReferenceEquals(_currentCombatState, combatState)
             && _challengeMode == KaoyanChallengeMode.Challenge)
@@ -1074,6 +1080,7 @@ public sealed class KaoyanLexicon : RelicModel
                 }
 
                 await DrawExtraCardForChallengeSafelyAsync(roundNumber, combatState);
+                await DelayForChoiceUiSettleAsync();
 
                 await WaitForCombatQueueToSettleAsync();
                 if (!CanStartKaoyanQuestionNow(combatState, roundNumber))
@@ -1119,6 +1126,11 @@ public sealed class KaoyanLexicon : RelicModel
         await Task.Delay(100);
     }
 
+    private static async Task DelayForChoiceUiSettleAsync()
+    {
+        await Task.Delay(50);
+    }
+
     private async Task DrawExtraCardForChallengeSafelyAsync(int roundNumber, CombatState combatState)
     {
         await DrawExtraCardForChallengeSafelyAsync(roundNumber, combatState, new BlockingPlayerChoiceContext());
@@ -1143,14 +1155,72 @@ public sealed class KaoyanLexicon : RelicModel
         try
         {
             _lastExtraDrawRound = roundNumber;
+            if (!CanAttemptExtraChallengeDraw(combatState, out var skipReason, out var drawPreventer))
+            {
+                Log.Warn($"[KaoyanEnglishMod] Extra challenge draw skipped. Round {roundNumber}. Reason: {skipReason}. Continuing to question.");
+                if (drawPreventer != null)
+                {
+                    await Hook.AfterPreventingDraw(combatState, drawPreventer);
+                }
+
+                return;
+            }
+
             Log.Warn($"[KaoyanEnglishMod] Drawing 1 extra card for challenge mode. Round {roundNumber}.");
-            await CardPileCmd.Draw(choiceContext, 1m, Owner);
+            var drawnCards = (await CardPileCmd.Draw(choiceContext, 1m, Owner)).ToList();
+            if (drawnCards.Count == 0)
+            {
+                Log.Warn($"[KaoyanEnglishMod] Extra challenge draw produced no card. Round {roundNumber}. Continuing to question.");
+                return;
+            }
+
+            _lastExtraDrawRound = roundNumber;
+            Log.Warn($"[KaoyanEnglishMod] Extra challenge draw completed. Round {roundNumber}. Cards drawn: {drawnCards.Count}.");
         }
         catch (Exception exception)
         {
             Log.Error("[KaoyanEnglishMod] Failed to draw extra challenge card.");
             Log.Error(exception.ToString());
         }
+    }
+
+    private bool CanAttemptExtraChallengeDraw(
+        CombatState combatState,
+        out string reason,
+        out AbstractModel? preventingModel)
+    {
+        preventingModel = null;
+
+        if (!IsKaoyanCombatStillActive(combatState))
+        {
+            reason = "combat is no longer active";
+            return false;
+        }
+
+        var handPile = PileType.Hand.GetPile(Owner);
+        if (handPile.Cards.Count >= 10)
+        {
+            reason = "hand is full";
+            return false;
+        }
+
+        var drawPile = PileType.Draw.GetPile(Owner);
+        var discardPile = PileType.Discard.GetPile(Owner);
+        if (drawPile.Cards.Count + discardPile.Cards.Count == 0)
+        {
+            reason = "draw and discard piles are empty";
+            return false;
+        }
+
+        if (!Hook.ShouldDraw(combatState, Owner, fromHandDraw: false, out var hookPreventer))
+        {
+            preventingModel = hookPreventer;
+            reason = $"draw prevented by {hookPreventer?.GetType().Name ?? "unknown source"}";
+            return false;
+        }
+
+        reason = string.Empty;
+        return true;
     }
 
     private async Task ApplyDeclinedRewardSafelyAsync(CombatState combatState)
@@ -1326,6 +1396,7 @@ public sealed class KaoyanLexicon : RelicModel
             _pendingQuestionRound = -1;
 
             await DrawExtraCardForChallengeSafelyAsync(message.RoundNumber, combatState);
+            await DelayForChoiceUiSettleAsync();
             await WaitForCombatQueueToSettleAsync();
 
             if (!IsLocalOwner())
@@ -2743,6 +2814,11 @@ public sealed class KaoyanLexicon : RelicModel
             return false;
         }
 
+        if (!HasOfficialSelectionUiBeenIdleLongEnough())
+        {
+            return false;
+        }
+
         var combatManager = CombatManager.Instance;
         if (combatManager == null)
         {
@@ -2754,6 +2830,63 @@ public sealed class KaoyanLexicon : RelicModel
             && !combatManager.EndingPlayerTurnPhaseOne
             && !combatManager.EndingPlayerTurnPhaseTwo
             && combatManager.IsPartOfPlayerTurn(Owner);
+    }
+
+    private bool HasOfficialSelectionUiBeenIdleLongEnough()
+    {
+        if (IsOfficialSelectionFlowBusy())
+        {
+            _lastOfficialSelectionBusyUtc = DateTime.UtcNow;
+            return false;
+        }
+
+        if (_lastOfficialSelectionBusyUtc == DateTime.MinValue)
+        {
+            return true;
+        }
+
+        return (DateTime.UtcNow - _lastOfficialSelectionBusyUtc).TotalSeconds >= OfficialSelectionQuietWindowSeconds;
+    }
+
+    private static bool IsOfficialSelectionFlowBusy()
+    {
+        return IsOfficialSelectionUiBusy() || IsActionQueueBusy();
+    }
+
+    private static bool IsOfficialSelectionUiBusy()
+    {
+        var overlayStack = NOverlayStack.Instance;
+        if (overlayStack != null && overlayStack.ScreenCount > 0)
+        {
+            return true;
+        }
+
+        var playerHand = NPlayerHand.Instance;
+        if (playerHand != null && (playerHand.IsInCardSelection || playerHand.InCardPlay))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private static bool IsActionQueueBusy()
+    {
+        var runManager = RunManager.Instance;
+        if (runManager == null)
+        {
+            return false;
+        }
+
+        var actionExecutor = runManager.ActionExecutor;
+        if (actionExecutor != null
+            && (actionExecutor.IsRunning || actionExecutor.CurrentlyRunningAction != null))
+        {
+            return true;
+        }
+
+        var actionQueueSet = runManager.ActionQueueSet;
+        return actionQueueSet != null && !actionQueueSet.IsEmpty;
     }
 
     private bool IsKaoyanCombatStillActive(CombatState combatState)
